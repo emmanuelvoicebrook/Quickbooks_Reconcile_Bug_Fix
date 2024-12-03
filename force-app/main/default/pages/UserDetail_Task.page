@@ -1,0 +1,3 @@
+<apex:page standardController="Task" >
+  <apex:detail subject="{!Task.WhoId}" relatedList="true" title="false"/>
+</apex:page>

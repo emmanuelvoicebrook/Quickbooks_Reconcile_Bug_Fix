@@ -1,0 +1,8 @@
+<apex:page standardController="Lead">
+    <apex:relatedList list="OpenActivities"/>
+    <apex:relatedList list="ActivityHistories"/>  
+    <apex:relatedList list="Manager__r"/>
+    <apex:relatedList list="CampaignMembers"/>  
+    <apex:relatedList list="CombinedAttachments"/>
+    <apex:relatedList list="ProcessSteps"/>  
+</apex:page>

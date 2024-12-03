@@ -1,0 +1,21 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" >
+    <!-- Attributes to receive variables from parent component or URL -->
+    <!-- Attributes to receive variables -->
+    <aura:attribute name="email" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="errorMessage" type="String" default="" />
+
+    <!-- Flow component (only displayed when both variables are present) -->
+    <aura:if isTrue="{!empty(v.errorMessage)}">
+        <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}" />
+    </aura:if>
+
+    <!-- Error message (displayed when variables are missing) -->
+    <aura:if isTrue="{!not(empty(v.errorMessage))}">
+        <div class="slds-box slds-theme_error slds-m-around_medium">
+            <p>{!v.errorMessage}</p>
+        </div>
+    </aura:if>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+</aura:component>

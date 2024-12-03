@@ -1,0 +1,52 @@
+<template>
+    <template if:true={isSameStatus}>
+        <div class="dragCard" data-id={record.Id} 
+            onclick={senddata} ondragstart={itemDragStart} 
+            ondragend={removeDragStyle} draggable={getCanDragProperty}>
+        
+                <div data-target="card" style={getCardColor}  class='Card slds-item slds-m-around-small slds-title slds-tile-board'>
+                    <h3 class="slds-truncate slds-section-title-divider slds-m-bottom-x-small slds-title slds-theme_shade" >
+                        <div class="tile-header">
+                            <a class="slds-truncate card-header" href="#" data-id={record.Id} onclick={navigateRecordHandler}>
+                                {record.Subject__c}                            
+                            </a>
+                            <div class={record.Priority__c}>
+                                <div aria-describedby="help" aria-disabled="true" class="Priority">
+                                    <template if:true={record.Overdue__c}>
+                                        <img alt="overdue" src={clockImage} title="overdue" class="overdue"/>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </h3>
+
+                    <div class="slds-tile__detail slds-text-body-small">
+                        <template if:true={displayFields}>
+                            <template for:each={displayFields} for:item="set">
+                                <div key={set.label}>
+                                    <p class="slds-truncate tile_content">
+                                        <span class="main_text slds-truncate">{set.label}: </span> 
+                                        <span class="card-details" data-name={set.apiname}>
+                                            {set.value}
+                                        </span>
+                                    </p>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={displayFields}>
+                            <lightning-spinner alternative-text="Loading" variant="brand" size="small">                            
+                            </lightning-spinner>
+                        </template>
+                    </div>
+                    <span  class="slds-float_right slds-is-absolute slds-avatar slds-avatar_circle slds-avatar_small ownImg">
+                        <img alt={AssignedDetails} src={getAssignedPhoto} title={AssignedDetails} />
+                    </span>
+                    <span class="slds-float_right slds-is-absolute slds-avatar slds-avatar_circle slds-avatar_small reqImg">
+                        <img alt={RequestedForDetails} src={getRequestedForPhoto} title={RequestedForDetails} />
+                    </span>
+                </div>
+                    
+        </div>
+    </template>
+</template>

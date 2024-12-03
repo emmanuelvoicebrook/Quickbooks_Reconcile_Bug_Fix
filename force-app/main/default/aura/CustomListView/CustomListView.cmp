@@ -1,0 +1,18 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<!-- Attributes for list view name and object API name -->
+    <aura:attribute name="listViewName" type="String" default="Community_My_Open_Cases" />
+    <aura:attribute name="objectApiName" type="String" default="Case" />
+
+    
+    <!-- List View Component -->
+    <lightning:listView 
+        aura:id="listViewComponent"
+        objectApiName="{!v.objectApiName}"
+        listName="{!v.listViewName}"
+        rows="10"
+        showSearchBar="true"
+        showActionBar="false"
+        enableInlineEdit="false"
+        showRowLevelActions="false"
+    />
+</aura:component>

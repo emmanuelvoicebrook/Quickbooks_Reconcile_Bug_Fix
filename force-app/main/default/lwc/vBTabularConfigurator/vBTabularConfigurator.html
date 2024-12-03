@@ -1,0 +1,34 @@
+<template>
+    <div class="preview hide">
+        <lightning-card>
+            <h3 slot="title">Form Preview</h3>
+            <c-v-b-tabular-collector form-name={previewTemplateName} ></c-v-b-tabular-collector>
+        </lightning-card>
+    </div>
+
+    <lightning-card>
+        <h3 slot="title">Tabular Configurator</h3>
+        <lightning-button slot="actions" label="New Collection Form" onclick={handleAddCollector}></lightning-button>
+
+        <div >
+            <!-- <div class="buttons">
+                <lightning-button label="New Collection Form" onclick={handleAddCollector}></lightning-button>
+            </div> -->
+            <c-v-b-tabular-new-collector onclosemodal={closeModal}></c-v-b-tabular-new-collector>
+            <c-v-b-tabular-edit-collector onclosemodal={closeEditModal} collectorid={} ></c-v-b-tabular-edit-collector>
+            
+            <lightning-datatable key-field="id"
+                                columns={columns}
+                                data={data}
+                                hide-checkbox-column
+                                show-row-number-column
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortDirection}
+                                sorted-by={sortedBy}
+                                onrowaction={handleRowAction}
+                                onsort={handleSort}>
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>

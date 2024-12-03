@@ -1,0 +1,6 @@
+<apex:page standardController="ahaapp__AhaIdea__c">
+  <h2>You can not create a new Aha! Idea from here!</h2>
+  <p>Please go to the relevant account, opportunity, or case</p>
+  <p>and scroll down to the "Aha! Idea Request" section</p>
+  <p>and select the "Request an idea" button. </p>
+  </apex:page>

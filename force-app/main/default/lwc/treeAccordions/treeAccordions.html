@@ -1,0 +1,47 @@
+<template>
+    <template if:true={ready}>
+        <template for:each={title_data} for:item="item">
+            <div key={item.label}>
+                <div class="slds-section" data-id={item.label} data-name="accordions">
+                    <!--section header-->
+                    <h3 class="slds-section__title" style="border: 0 !important;">
+                        <div aria-controls={item.label} class="slds-button slds-section__title-action" data-buttonid={item.label}
+                            onclick={toggleSection}>
+                            <lightning-icon icon-name="utility:switch" alternative-text="button icon" size="x-small"
+                                class="slds-section__title-action-icon slds-button__icon_left">
+                            </lightning-icon>
+                            <span class="slds-truncate" title={label}>{item.label}</span>
+                        </div>
+                    </h3>
+                    <!--section body-->
+                    <template if:true={rerender}>
+                        <!-- <div class="slds-section__content" style="padding-top: 0px !important;padding-left: 2em !important;">
+                            <lightning-checkbox-group name='titles' label="" class="slds-m-around_xxx-small" data-name="titles"
+                                value={_active_article_urlname} options={item.titles} onchange={handleTitleClick} type="checkbox">
+                            </lightning-checkbox-group>
+                        </div> -->
+                        <div class="slds-section__content" style="padding-top: 0px !important;padding-left: 2em !important;">
+                            <!-- <lightning-checkbox-group name='titles' label="" class="slds-m-around_xxx-small" data-name="titles"
+                                value={_active_article_urlname} options={item.titles} onchange={handleTitleClick} type="checkbox">
+                            </lightning-checkbox-group> -->
+                            <template for:each={item.titles} for:item="title">
+                                <div class="slds-form-element" key={title.value}>
+                                    <div class="slds-form-element__control">
+                                      <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id={title.value} onclick={handleTitleClick} data-name={title.value} value={title.value}/>
+                                        <label class="slds-checkbox__label" for={title.value}>
+                                          <span class="slds-checkbox_faux"></span>
+                                          <span class="slds-form-element__label">{title.label}</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </template>
+                            
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

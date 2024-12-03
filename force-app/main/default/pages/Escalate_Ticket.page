@@ -1,0 +1,6 @@
+<apex:page standardController="Case">
+    <flow:interview name="Ticket_Escalation" finishLocation="closeWin">
+            <apex:param name="Ticket_ID" value="{!Case.Id}"/>
+            <apex:param name="Current_User_ID" value="{!$User.Id}"/> 
+    </flow:interview>
+</apex:page>

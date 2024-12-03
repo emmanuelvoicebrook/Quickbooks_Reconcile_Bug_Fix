@@ -1,0 +1,33 @@
+<template>
+
+    <!-- <lightning-accordion allow-multiple-sections-open
+                         onsectiontoggle={handleSectionToggle}
+                         active-section-name={activeSections}>
+
+        <lightning-accordion-section name="main" label={keyText}>
+            <lightning-formatted-rich-text value={hiddenText}></lightning-formatted-rich-text>
+        </lightning-accordion-section>
+
+    </lightning-accordion> -->
+    <div class="slds-section" data-id="opener" data-name="accordions">
+        <h4 class="slds-section__title" style="border: 0 !important; font-size:13px !important">
+            <div aria-controls="opener" class="slds-button slds-section__title-action" data-buttonid="opener" 
+                onclick={toggleSection}>
+                <lightning-icon icon-name="utility:switch" alternative-text="button icon" size="x-small"
+                    class="slds-section__title-action-icon slds-button__icon_left">
+                </lightning-icon>
+                <span class="slds-truncate" title={label}>{keyText}</span>
+            </div>
+        </h4>
+        <div class="slds-section__content" style="padding-top: 0px !important;padding-left: 2em !important;">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                  <div class="content">
+                    <lightning-formatted-rich-text value={hiddenText}></lightning-formatted-rich-text>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</template>

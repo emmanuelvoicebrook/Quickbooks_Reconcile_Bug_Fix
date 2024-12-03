@@ -1,0 +1,5 @@
+<apex:page standardController="Contact">
+    <apex:relatedList list="Add_Resource_1__r"/>
+    <apex:relatedList list="Cases_Add_Res_2__r"/>
+    <apex:relatedList list="Cases_Add_Resource_3__r"/>    
+</apex:page>

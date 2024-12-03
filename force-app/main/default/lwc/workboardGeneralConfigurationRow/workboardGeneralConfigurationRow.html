@@ -1,0 +1,19 @@
+<template>
+    <div class="row" style="display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-between;">
+        <lightning-input disabled={disabled} type="text" onchange={valueChange} placeholder="Field Label" label="Field Label" value={data.label}></lightning-input>
+        <lightning-input disabled={disabled} type="text" onchange={apiChange} placeholder="Field API Name" label="Field API Name" value={data.apiname}></lightning-input>
+        <template if:false={disabled}>
+            <div class="delete" onclick={handleDelete}>            
+                <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete" size="xx-small" style="margin-top: 1.8em;"></lightning-icon>
+            </div>
+        </template>
+        
+        <!-- <div class="later" style="display: flex;">
+             <div class="apiInput" style="margin-right: 4.2em;">
+                
+            </div> ->
+        </div> -->
+    </div>
+</template>

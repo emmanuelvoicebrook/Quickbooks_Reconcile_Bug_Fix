@@ -1,0 +1,62 @@
+<template>
+    <div class="main">
+
+        <!-- Back button -->
+        <template if:true={showBackButton}>
+            <button class="headerButton backButton" onclick={onBackButtonClick}>
+                <lightning-icon icon-name="utility:back" variant="inverse" size="x-small"></lightning-icon>
+            </button>
+        </template>
+
+        <!-- Header logo -->
+        <img src={voicebrook_logo} alt="VB Logo" />
+
+        <!-- Header menu -->
+        <section class={menuClass}>
+            <template if:true={showMenuButton}>
+                <!-- Menu button -->
+                <button class="headerButton menuButton" onclick={onMenuButtonClick}>
+                    <lightning-icon icon-name="utility:threedots_vertical" variant="inverse"
+                        size="x-small"></lightning-icon>
+                </button>
+            </template>
+
+            <!-- Menu options-->
+            <section class="optionsMenu slds-dropdown slds-dropdown_right slds-nubbin_top-right">
+                <ul class="slds-dropdown__list">
+                    <!-- Bot menu options -->
+                    <!-- <template for:each={chatbotOptionsMenu} for:item="option">
+                    <li class="slds-dropdown__item" key={option.optionIdentifier}>
+                        <button class="chatbotMenuOption"
+                                value={option.optionIdentifier}
+                                onclick={onMenuOptionClick}>
+                            <span value={option.optionIdentifier}>{option.title}</span>
+                        </button>
+                    </li>
+                </template> -->
+
+                    <!-- End conversation option -->
+                    <template if:false={isAuthenticatedContext}>
+                        <li class="slds-dropdown__item">
+                            <button class="chatbotMenuOption" onclick={onEndConversationClick}>
+                                <span class="slds-text-color_error">End Conversation</span>
+                            </button>
+                        </li>
+                    </template>
+                </ul>
+            </section>
+        </section>
+
+    </div>
+
+
+    <!-- Minimize button and Close button if ever needed -->
+    <!-- <button class="headerButton minimizeButton" onclick={onMinimizeButtonClick}>
+        <lightning-icon icon-name="utility:chevrondown" variant="inverse" size="x-small"></lightning-icon>
+    </button>
+    <template if:true={showCloseButton}>
+        <button class="headerButton closeButton" onclick={onCloseButtonClick}>
+            <lightning-icon icon-name="utility:close" variant="inverse" size="x-small"></lightning-icon>
+        </button>
+    </template> -->
+</template>

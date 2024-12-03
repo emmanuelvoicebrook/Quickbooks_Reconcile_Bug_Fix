@@ -1,0 +1,121 @@
+<apex:page standardController="Implementation_User__c" showHeader="false" sidebar="false" standardStylesheets="false">
+  <head>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .col {
+        flex: 1 1 auto;
+        padding: 0 8px; /* Adjust spacing between columns */
+      }
+      .col-50 {
+        flex-basis: 50%;
+      }
+      .form-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px; /* Adjust based on your spacing preference */
+      }
+      .form-label {
+        flex: 1;
+        font-size : 16px; /* Adjust font size */
+        padding-right: 10px; /* Adjust label spacing */
+      }
+      .form-control {
+        flex: 3;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px 12px;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .heading-large {
+        font-size: 24px; /* Adjust font size */
+        font-weight: bold;
+      }
+      .heading-small {
+        font-size: 20px;; /* Adjust font size */
+        font-weight: bold;
+      }
+
+    </style>
+    <script>
+      function sendCompleteMessage() {
+          var message = { 
+              status: 'complete'
+          };
+          window.parent.postMessage(JSON.stringify(message), '*');
+      }
+      // on document ready 
+      document.addEventListener('DOMContentLoaded', function() {
+        var message = { 
+            status: 'loaded'
+        };
+        window.parent.postMessage(JSON.stringify(message), '*');
+        
+      });
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="grid">
+        <apex:image id="logo" value="{!$Resource.VoiceOver_Logo}" alt="VoiceOver Logo"/>
+      </div>
+      <div class="text-center">
+        <h4 class="heading-large">Training Acknowledgment</h4>
+      </div>
+      <hr/>
+
+      <div class="grid">
+        <div class="col col-50">
+          <div class="form-row">
+            <label class="form-label" for="account"><strong>Account:</strong></label>
+            <span class="form-control" id="account">
+              {!Implementation_User__c.Account_Official_Name__c}
+            </span>
+          </div>
+        </div>
+        <div class="col col-50">
+          <div class="form-row">
+            <label class="form-label" for="date"><strong>Date:</strong></label>
+            <span class="form-control" id="date">
+              {!Implementation_User__c.Today__c}
+            </span>
+          </div>
+        </div>
+        <div class="col col-50">
+          <div class="form-row">
+            <label class="form-label" for="instructor"><strong>Instructor:</strong></label>
+            <span class="form-control" id="instructor">
+              {!Implementation_User__c.Trainer__r.Name}
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="m-top-medium">
+          <h5 class="heading-small" style="text-decoration: underline;">Acknowledgment:</h5>
+          <p>I, <strong>{!Implementation_User__c.Full_Name__c}</strong>, confirm receiving comprehensive VoiceOver training and materials.</p>
+      </div>
+
+      <br/>
+      <EZSign:getSignature W="320" requireName="true" createPDFAttachment="true" saveFunction="sendCompleteMessage()" />
+    </div>
+
+  </body>
+</apex:page>

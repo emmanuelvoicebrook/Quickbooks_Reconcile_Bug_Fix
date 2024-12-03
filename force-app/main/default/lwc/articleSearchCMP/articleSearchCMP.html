@@ -1,0 +1,61 @@
+<template>
+
+    <div class="page">
+      <div class="slds-form-element" style="width:50%;">
+        <div class="label">
+          <span class="slds-truncate">
+            <span class="slds-truncate" >Voicebrook Knowledgebase Search:</span>
+          </span>
+        </div>
+
+        
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+          <div class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default searchIcon" aria-hidden="true">
+            <lightning-icon icon-name="utility:search" alternative-text="search" title="search" size="x-small"></lightning-icon>            
+          </div>
+          <lightning-input placeholder="" id="searchField" variant="label-hidden" label="Voicebrook Knowledgebase Search:" class="searchField" onchange={handleSearch}></lightning-input>
+          <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right clearButton" title="Clear" onclick={clearText}>
+            <div class="slds-button__icon slds-icon-text-light" aria-hidden="true" onclick={clearText} >
+              <lightning-icon class="x-button" color="red" icon-name="utility:clear" alternative-text="clear" title="clear" onclick={clearText} size="x-small"></lightning-icon>
+            </div>
+            <span class="slds-assistive-text">Clear</span>
+          </button>
+        </div>
+      
+        <div class="filter" style="width:100%">
+          <span class="filters">
+            <template for:each={filterOptions} for:item="option">
+              <fieldset key={option.value} class="options">
+                <div class="slds-form-element__control">
+                  <span class="slds-radio slds-truncate">
+                    <input class="filterRadio" name="radiogroup" id={option.value} type="radio" value={option.value} onchange={handleSelected}/>
+                    <label class="slds-radio__label" for={option.value}>
+                      <span class="slds-radio_faux"></span>
+                      <span class="slds-form-element__label slds-truncate">{option.label}</span>
+                    </label>
+                  </span>
+                </div>
+              </fieldset>
+            </template>
+
+          </span>
+          
+        </div>
+      <div>
+          <template if:true={searchTxt}>
+            <br/>
+            <p>Knowledge Articles (Top {noRecords} Hits):</p>
+              <template for:each={articles} for:item="art">
+                <div key={art.Id}>
+                    <lightning-input class="articles" type="checkbox" label={art.Title} value={art.Id} onclick={handleCheck}></lightning-input>
+                </div>                
+              </template>            
+          </template>
+          
+      </div>
+    </div>
+    </div>
+    
+    
+    
+</template>

@@ -1,0 +1,5 @@
+<design:component>
+    <design:attribute name="AccountId" label="Account ID" description="The ID of the Account selected."/>
+    <design:attribute name="UserId" label="User ID" description="The ID of the User selected."/>
+    <design:attribute name="ContactId" label="Contact ID" description="The ID of the Contact selected."/>
+</design:component>

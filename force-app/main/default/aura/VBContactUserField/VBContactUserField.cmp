@@ -1,0 +1,61 @@
+<!-- 
+
+    THIS COMPONENT IS USED TO MAKE THE USER EXPERIENER BY ALLOWING THE USER TO SELECT  IS THE CONTACT AND USER IS SAME
+    WHEN THE CHECKBOX IS SELECTED THE COMPONENT WILL AUTOMATICALLY POPULATE THE USER FIELD WITH THE CONTACT FIELD
+
+    THE USER IS FIRST REQUIRED TO CHOOSE THE ACCOUNT. IF THE ACCOUNT IS NOT SELECTED THEN THE USER AND CONTACT FIELD WILL
+    REMAIN DISABLED
+
+    IF THE VALUE OF THE USER IS NOT THE SAME AS THAT OF THE CONTACT THEN THE CHECKBOX WILL BE UNCHECKED
+    THIS CODE USES A CUSTOM LOOKUP WHOSE DOCUMENTATION IS 
+        *https://appexchange.salesforce.com/partners/servlet/servlet.FileDownload?file=00P3A00000nid67UAA
+ -->
+
+<aura:component implements="lightning:availableForFlowScreens" description="Contact-User LookUp Field">
+    <!-- ERROR ATTRIBUTE -->
+    <aura:attribute name="ErrorMessage" type="String" default="" />
+
+    <!-- SELECTED ACCOUNT -->
+    <aura:attribute name="AccountId" type="String" />
+    <!-- SELECTED CONTACT -->
+    <aura:attribute name="ContactId" type="String" />
+    <!-- SELECTED USER -->
+    <aura:attribute name="UserId" type="String" />
+    <!-- QUERY CONDITION -->
+    <aura:attribute name="QueryCondition" type="String" default="" />
+    <!-- INIT -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>      
+    <aura:attribute name="validate" type="Aura.Action" 
+                    description="Confirms that the account, contact and user fields are populated"/>
+
+    <!-- User Same as Contact -->
+    <aura:attribute name="UserSameAsContact" type="Boolean" default="false" />
+
+    <!-- ERROR MESSAGE -->
+    <aura:if isTrue="{!not(empty(v.ErrorMessage))}">
+        <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+            <lightning:icon iconName="utility:warning" size="small" /> &nbsp;
+            <ul>
+                <li>{!v.ErrorMessage}</li>
+            </ul>
+        </div>
+    </aura:if>
+
+    <l_lookup:Lookup objectType="Account" selectedRecordId="{!v.AccountId}" 
+                     onchange="{!c.handleAccChange}" isRequired="true"/>
+    <br/>
+    <l_lookup:Lookup objectType="Contact" aura:id="ContactId" 
+                     selectedRecordId="{!v.ContactId}" queryCondition="{!v.QueryCondition}" 
+                     disabled="{!empty(v.AccountId)}"  isRequired="true"/>
+
+    <!-- CHECKBOX -->
+    <lightning:input type="checkbox" aura:id="checkbox" 
+                     label="User is the Same as Contact" style="margin: 10px 0 0 5px;"
+                     onchange="{!c.handleCheckbox}" isRequired="true" />
+
+    <l_lookup:Lookup objectType="Contact" aura:id="UserId" 
+                     selectedRecordId="{!v.UserId}" queryCondition="{!v.QueryCondition}"  
+                     disabled="{!empty(v.AccountId)}" onchange="{!c.handleUserChange}" 
+                     isRequired="true"/>
+
+</aura:component>

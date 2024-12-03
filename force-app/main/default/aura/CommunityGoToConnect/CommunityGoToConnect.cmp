@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <body onload="document.forms[0].name.focus();">
+        <div class="connect-form">
+            <h3 class="heading">Already in contact with support</h3>
+            <hr/>
+            <p>
+                If you're already in touch with client support and need to start a sccreenshare with an agent, please enter your name and the 9-digit session number the agent provided
+            </p>
+            <form method="POST" action="https://www.fastsupport.com/servlet/download/customerDownload" name="ssid" target="_blank">
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="inputs">
+                        <lightning:input type="text" label="Name" name="name" variant="label-inline"/>
+                        <lightning:input type="text" label="Session #" name="supportSessionId" size="25" variant="label-inline"  />
+                    </div>
+                    <div class="button">
+                        <lightning:button class="slds-m-top_small slds-button_brand" type="submit" label="Connect" />
+                    </div>
+                </div> 
+                
+            </form>
+        </div>
+    </body>
+</aura:component>

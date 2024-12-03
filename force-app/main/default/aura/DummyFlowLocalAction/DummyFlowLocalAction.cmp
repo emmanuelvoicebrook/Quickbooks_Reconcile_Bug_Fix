@@ -1,0 +1,3 @@
+<aura:component implements="force:LightningQuickActionWithoutHeader" access="global">
+    <!-- Blank component -->
+</aura:component>

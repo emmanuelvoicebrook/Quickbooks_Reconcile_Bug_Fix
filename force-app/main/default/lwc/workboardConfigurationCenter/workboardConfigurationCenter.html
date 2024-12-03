@@ -1,0 +1,98 @@
+<template>
+    <!-- <div style="background-color: aliceblue; border-radius: .5em; padding:.9em; width:90em"> -->
+    <lightning-card icon-name="work_order" icon-size="large">
+        <div slot="title" style="display:flex; justify-content:center" class="title">Workboard Configuration Center</div>
+        <lightning-tabset>
+            <lightning-tab label="General">
+                <div class="tab">
+                        <div class="edit">
+                            <lightning-button disabled={getGeneralEditDisabled} variant="brand" label="Edit" title="Edit" onclick={handleEditGeneral}></lightning-button>
+                            
+                            <lightning-button disabled={generalEditDisabled} variant="destructive" label="Cancel" title="Cancel" onclick={handleCancelFields} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button disabled={generalEditDisabled} variant="success" label="Save" title="Save" onclick={saveFields} class="slds-m-left_x-small"></lightning-button>    
+                        </div>
+                    <h2>General Configuration</h2>
+                    <div class="top">                    
+                        <div class="topList">
+                            <lightning-input type="text" disabled={generalEditDisabled} class="top-items" label="Workboard Header" value={header} onchange={handleHeaderChange}></lightning-input>
+                            <!-- <lightning-input type="text" label="Main Record Type Id" value={recordTypeId} onchange={handleRecTypeChange}></lightning-input> -->
+                            <lightning-input type="text" disabled={generalEditDisabled} class="top-items" label="Record Creation Flow Name" value={createFlow} onchange={handleCreationFlowChange}></lightning-input>
+                            <lightning-input type="text" disabled={generalEditDisabled} class="top-items" label="Record Update Flow Name" value={updateFlow} onchange={handleUpdateFlowChange}></lightning-input>
+                            
+                        </div>
+                        
+                        <c-v-b-multi-select-picklist disabled={generalEditDisabled} label="Record Types" options={recordTypeOptions} value={getSelectedRecordTypes} onchange={handleRecTypeListChange}></c-v-b-multi-select-picklist>
+                        <br/>
+                    </div>
+                    <h2>Fields To Display On Card: </h2>
+                    <div class="fields" style="display: flex;
+                                               flex-wrap: wrap;
+                                               justify-content: center;">
+                        <div style="width: 100%;">
+                            <template for:each={fieldsToDisplay} for:item="fieldData">
+                                <div key={fieldData.apiname} class="field">
+                                    <c-workboard-general-configuration-row  disabled={generalEditDisabled} info={fieldData} ondelete={handleDelete} onlabelchange={handleLabelChange} onapichange={handleApiChange}></c-workboard-general-configuration-row>
+                                </div>
+                            </template>
+                            <template if:false={generalEditDisabled}>
+                                <div class="add" onclick={handleAddField}>
+                                    <img class="addImage" src={addImage} style="margin: auto; height: 45%;">
+                                </div>
+                            </template>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+          
+            </lightning-tab>
+            <lightning-tab label="Themes">
+                <div class="tab">
+                    <div class="edit">
+                        <lightning-button disabled={getThemeEditDisabled} variant="brand" label="Edit" title="Edit" onclick={handleEditThemes}></lightning-button>
+                        <lightning-button disabled={themeEditDisabled} variant="destructive" label="Cancel" title="Cancel" onclick={handleColorCancel} class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button disabled={themeEditDisabled} variant="success" label="Save" title="Save" onclick={handleColorSave} class="slds-m-left_x-small"></lightning-button> 
+                    </div>
+                    <h2>Color Configuration:</h2>
+                    <div class="top">
+                        <lightning-combobox 
+                                        name="theme"
+                                        label="Theme Name"
+                                        value={currentTheme}
+                                        placeholder="Choose a theme to edit"
+                                        options={themeOptions}
+                                        onchange={handleThemeChange} >
+                        </lightning-combobox>
+                        <div class="themeTop">                    
+                            <lightning-input onchange={handleBackgroundChange} disabled={themeEditDisabled} type="color" class="top-items" label="Background Color" value={currentSetting.background}></lightning-input>
+                            <lightning-input onchange={handleFontChange} disabled={themeEditDisabled} type="color" class="top-items" label="Background Text Color" value={currentSetting.fontColor}></lightning-input>
+                            <lightning-input onchange={handlePatchColorChange} disabled={themeEditDisabled} type="color" class="top-items" label="Path Color" value={currentSetting.pathColor}></lightning-input>
+                        </div>
+                    </div>
+                    <br/>
+                    <h2>Card Colors: </h2>
+                    <div class="fields">
+                        <div style="width: 100%">
+                                    <template for:each={getThemeOptions} for:item="fieldData">
+                                        <div key={fieldData.RecordType} class="field">
+                                            <c-Workboard-Color-Configuration-Row disabled={themeEditDisabled} info={fieldData} ondelete={handleColorDelete} oncolorchange={handleColorchange}></c-Workboard-Color-Configuration-Row>
+                                        </div>
+                                    </template>
+                                    <template if:false={themeEditDisabled}>
+                                        <div class="add" onclick={handleAddColor}>
+                                            <img class="addImage" src={addImage} style="margin: auto; height: 45%;">
+                                        </div>  
+                                    </template>
+                                      
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+    <!-- </div>     -->
+    
+</template>

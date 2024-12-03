@@ -1,0 +1,4 @@
+<design:component label="Custom List View">
+    <design:attribute name="listViewName" label="List View Name" description="API name of the list view to display" />
+    <design:attribute name="objectApiName" label="Object API Name" description="API name of the object (e.g., Case, Account)" />
+</design:component>

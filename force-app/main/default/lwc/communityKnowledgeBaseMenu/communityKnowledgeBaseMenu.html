@@ -1,0 +1,43 @@
+<template>
+    <template if:false={showDetails}>
+
+        <div class="main">
+            <div class="tile-menu">
+                <template for:each={collectionPicklist} for:item="item">
+                    <c-community-knowledge-base-menu-item key={item.id} item={item} onselect={handleSelection}
+                        class="tile-item">
+                    </c-community-knowledge-base-menu-item>
+                </template>
+            </div>
+        </div>
+
+    </template>
+    <template if:true={showDetails}>
+
+            <div class="slds-grid slds-grid_align-start">
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning-icon icon-name="utility:back" alternative-text="Back" title="Back"
+                        class="back-button" onclick={handleBack}></lightning-icon>
+                </div>
+            </div>
+        <div class="details">
+            <div class="slds-grid slds-grid_align-center">
+                <div class="slds-col slds-size_1-of-5">
+                    <h1 class="collection-category"><strong>{activeCollection}</strong></h1>
+                </div>
+            </div>
+            <template for:each={articlesByCategory} for:item="group">
+                <div class="category-data" key={group.category}>
+                    <h2 class={group.category}>{group.category}:</h2>
+                    <ul class="articles">
+                        <template for:each={group.articles} for:item="article">
+                            <li key={article.Id} data-id={article.Id} class="article" onclick={handleClick}>
+                                <a>{article.Title}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

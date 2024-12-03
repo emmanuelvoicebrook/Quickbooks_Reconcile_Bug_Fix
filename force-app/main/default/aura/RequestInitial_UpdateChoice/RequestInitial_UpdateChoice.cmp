@@ -1,0 +1,53 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global">
+
+    <!--Atrributes-->
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedOption" type="String" default="" />
+    <aura:attribute name="caseStatus" type="String" />
+    <aura:attribute name="caseType" type="String" />
+    <aura:attribute name="opportunityExists" type="Boolean" />
+
+    <!-- error handler -->
+    <aura:attribute name="errorMessage" type="String" default="" />
+    <aura:attribute name="hasError" type="Boolean" default="false" />
+
+    <!-- Validation attributes -->
+    <aura:attribute name="validate" type="Aura.Action" description="Custom validation function to run when the flow is navigated to the next screen."/>
+    
+
+    <!-- Initialize -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+
+    <!-- show error message if error exists -->
+    <aura:renderIf isTrue="{!v.hasError}">
+        <!-- <ui:outputText value="{!v.errorMessage}"/>	 -->
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" style="border-radius: 5px; margin-top:30px;" role="alert">
+            <span class="slds-assistive-text">Warning</span>
+            <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+                <lightning:icon iconName="utility:warning" size="x-small" alternativeText="Warning"/>
+            </span>
+            <h2><ui:outputText value="{!v.errorMessage}"/></h2>
+        </div>
+        
+    </aura:renderIf>
+
+    <!-- Custom radio buttons using loop -->
+    <fieldset class="slds-form-element">
+        <legend class="slds-form-element__legend slds-form-element__label">
+        </legend>
+        <div class="slds-form-element__control" style="color:#666666; font-family:Arial, Helvetica, sans-serif;">
+            <aura:iteration items="{! v.options }" var="option">
+                <span class="slds-radio" style="margin-bottom:5px;">
+                    <input type="radio" id="{! option.value }" aura:id="{! option.value }" name="radioGroupRequired" value="{! option.value }"
+                        checked="{! v.selectedOption == option.value }" onchange="{! c.handleRadioChange }" />
+                    <label class="slds-radio__label" for="{! option.value }">
+                        <span class="slds-radio_faux"></span>
+                        <lightning:formattedRichText class="slds-form-element__label" value="{! option.label }" />
+                    </label>
+                    <lightning:helptext content="{! option.helperText }"/>
+                </span>
+            </aura:iteration>
+        </div>
+    </fieldset>
+</aura:component>

@@ -1,0 +1,4 @@
+<apex:page standardController="Case">
+    <apex:relatedList list="CaseSolutions"/>
+    <apex:relatedList subject="{!case}" list="CombinedAttachments" />
+</apex:page>

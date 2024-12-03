@@ -1,0 +1,164 @@
+<template>
+    <lightning-card title="3rd Party Renewals" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <div class="input">
+                <div class="slds-grid slds-wrap" style="padding-left: 11em;">
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-input 
+                            type="file" 
+                            label="Upload CSV File" 
+                            onchange={handleUploadFinished}
+                            accept=".csv"
+                        ></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <p>File Name: {fileName}</p>
+                    </div>
+                </div>
+            </div>
+            <template if:true={showProcessDataButton}>
+                <div class="slds-m-top_medium input">
+                    <button class="slds-button slds-button_brand" onclick={curateData}>Process Data</button>
+                    <button class="slds-button slds-button_destructive" onclick={clearData}>Clear Data</button>
+                </div>
+            </template>
+            <template if:true={showTable}>
+                <!-- button to save curated data -->
+                <!-- <button class="slds-button slds-button_brand" onclick={saveLicenses}>Save Data</button> -->
+                <div class="slds-m-top_medium">
+                    <!-- <table class="slds-table slds-table_bordered slds-datatable">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <template for:each={columns} for:item="col">
+                                    <th key={col} class="slds-text-title_caps">
+                                        <div class="slds-truncate" title={col}>{col}</div>
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={curatedData} for:item="data">
+                                <tr key={data.Id}>
+                                    <td>
+                                        <div class="slds-truncate" title={data.Type}>{data.Type}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={data.Date}>{data.Date}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={data.Amount}>{data.Amount}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={data.Account}>{data.Account}</div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table> -->
+                    <lightning-datatable key-field="Account" data={recordsToDisplay} hide-checkbox-column="true" columns={getColumns}>
+                    </lightning-datatable>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+                        <!--RECORDS PER PAGE-->
+                        <div class="slds-col">
+                            <div class="slds-list_inline slds-p-bottom_xx-small">
+                                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                                <div class="slds-select_container">
+                                    <select class="slds-select" id="recordsPerPage" onchange={handleRecordsPerPage}>
+                                        <template for:each={pageSizeOptions} for:item="option">
+                                            <option key={option} value={option}>{option}</option>
+                                        </template>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--PAGE NAVIGATION-->
+                        <div class="slds-align_absolute-center" style="height:5rem">
+                            <lightning-button disabled={bDisableFirst} icon-name="utility:jump_to_left" label="First" class="slds-p-horizontal_x-small" alternative-text="first page" onclick={firstPage}></lightning-button>
+                            <lightning-button disabled={bDisableFirst} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={previousPage}></lightning-button>
+                            &nbsp;
+                            <span class="slds-badge">Showing {pageNumber} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+                            &nbsp;
+                            <lightning-button disabled={bDisableLast} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={nextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+                            <lightning-button disabled={bDisableLast} icon-name="utility:jump_to_right" label="Last" alternative-text="last page" onclick={lastPage} icon-position="right"></lightning-button>
+                        </div>
+                        <!--TOTAL RECORDS-->
+                        <div class="slds-clearfix">
+                            <div class="slds-float_right">
+                                <span class="slds-badge"> Total Records: {totalRecords}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input">
+                    <button class="slds-button slds-button_brand" onclick={saveLicenses}>Save Data</button>
+                    <button class="slds-button slds-button_destructive" onclick={clearData}>Clear Data</button>
+                </div>
+            </template>
+
+            <template if:true={datacommited}>
+                <template if:true={success}>
+                    <!-- display number of records commited to the database -->
+                    <div class="input" style="flex-direction: column; align-items:center">
+                        <p><strong>Successful comits:</strong> {successCount}</p>
+                        <p><strong>Unsuccessful comits:</strong> {errorCount}</p>
+                    </div>
+                    <div class="input">
+                        <lightning-icon icon-name={get_icon_name} size="large" variant={status}></lightning-icon>
+                    </div>
+                    <div class="input">
+                        <span style={message_color_style}>{statusMessage}</span>
+                    </div>
+                    <template if:true={show_error_table}>
+                        <lightning-datatable
+                            key-field="Account Name"
+                            data={errorData}
+                            hide-checkbox-column="true"
+                            columns={errorColumns}>
+                        </lightning-datatable>
+                        <div class="" style="display:flex; justify-content:center">
+                            <lightning-button
+                                    variant="brand"
+                                    label="Download Error Data"
+                                    onclick={handleErrorDataDownload}
+                                    icon-name="utility:download"
+                                    class="slds-m-top_medium">
+                                </lightning-button>
+                        </div>
+                        
+                    </template>
+                </template>
+                <template if:false={success}>
+                    <div class="input" style="flex-direction: column; align-items:center">
+                        <p><strong>Successful comits:</strong> {successCount}</p>
+                        <p><strong>Unsuccessful comits:</strong> {errorCount}</p>
+                    </div>
+
+                    <div class="input">
+                        <lightning-icon icon-name="utility:error" size="large" variant="error"></lightning-icon>
+                    </div>
+                    <div class="input">                        
+                        <span style="color:red">Error Saving Records</span>
+                    </div>
+                    <template if:true={show_error_table}>
+                        <lightning-datatable
+                            key-field="Account Name"
+                            data={errorData}
+                            hide-checkbox-column="true"
+                            columns={errorColumns}>
+                        </lightning-datatable>
+                        <div class="" style="display:flex; justify-content:center">
+                            <lightning-button
+                                    variant="brand"
+                                    label="Download Error Data"
+                                    onclick={handleErrorDataDownload}
+                                    icon-name="utility:download"
+                                    class="slds-m-top_medium">
+                                </lightning-button>
+                        </div>
+                        
+                    </template>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

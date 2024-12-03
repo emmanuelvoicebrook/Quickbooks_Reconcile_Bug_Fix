@@ -1,0 +1,56 @@
+<!-- MainFlowComponent.cmp -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:availableForFlowScreens"
+    controller="VB_SignatureController">
+
+    <aura:attribute name="currentScreen" type="String" default="AccountAndImplementation" />
+    <aura:attribute name="selectedAccount" type="String" />
+    <aura:attribute name="selectedImplementation" type="String" />
+    <aura:attribute name="selectedUserId" type="String" /> 
+    <aura:attribute name="showBackButton" type="Boolean" default="false" />
+    <aura:attribute name="loading" type="Boolean" default="false" />
+
+    <aura:handler name="next" event="c:Signature_NextEvent" action="{!c.handleNext}" />
+    <aura:handler name="loaded" event="c:Signature_Ready" action="{!c.handleLoaded}" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Handlers for custom events to navigate between screens -->
+
+    <!-- Conditional rendering based on the current screen -->
+
+    <div
+        style="background-color: rgb(255, 255, 255); border-radius: 0.25rem; padding:3.8rem 1.25rem 1.25rem 1.25rem; height:100vh;">
+        <div style="height: 100%; width: 100%; position: relative;">
+            <aura:if isTrue="{!v.showBackButton}">
+                <!-- <a href="" style="position: absolute; z-index: 10;top: -2.5rem"">
+                    <lightning:icon iconName="action:back" alternativeText="Back" title="Back" size="xx-small" />Back
+                </a> -->
+                <div style="position: absolute; z-index: 10;top: -3rem">
+                    <lightning:buttonIcon iconName="utility:back" size="small" onclick="{!c.handleBack}" variant="brand" alternativeText="Back"
+                        title="Back" />
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.currentScreen == 'AccountAndImplementation'}">
+                <c:Signature_AccountAndImplementationSearch />
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.currentScreen == 'UserSearch'}">
+                        <c:Signature_UserSearchSelection selectedImplementation="{!v.selectedImplementation}" />
+                        <!-- Add more else-if conditions for other screens as needed -->
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!v.currentScreen == 'GetSignature'}">
+                                <c:Signature_GetSignature SelectedUserId="{!v.selectedUserId}" />
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!v.loading}">
+        <div class="exampleHolder">
+            <lightning:spinner alternativeText="Loading" size="medium" variant="brand" />
+        </div>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,28 @@
+<template>
+    <span style="font-weight: 700;">{masterLabel}</span>
+    
+    <template if:true={showRadio}>
+        <template for:each={records} for:item="item">
+            <fieldset key={item.Id}>
+                <div class="slds-form-element__control">
+                    <span class="slds-radio">
+                        <input name="radiogroup" id={item.Id} type="radio" value={item.Id} onchange={handleRadio}/>
+                        <label class="slds-radio__label" for={item.Id}>
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label radioLabels"></span>
+                        </label>
+                    </span>
+                </div>
+            </fieldset>
+        </template>
+    </template>
+
+    <template if:false={showRadio}>
+        <template for:each={records} for:item="item">
+            <div key={item.Id}>
+                <lightning-input class="checkBoxes" checked={defaultCheckBoxValue} type="checkbox" value={item.Id} onchange={handleCheck}></lightning-input>
+            </div>
+        </template>
+    </template>
+    
+</template>

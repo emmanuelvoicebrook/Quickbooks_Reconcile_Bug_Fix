@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickAction" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.init} "/>
+    <c:NewCase/>
+</aura:component>

@@ -1,0 +1,5 @@
+<apex:page standardController="Case">
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:iframe src="https://voicebrook--ahaapp.vf.force.com/apex/AhaCaseIdeas" width="100%" height="1000px" />
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

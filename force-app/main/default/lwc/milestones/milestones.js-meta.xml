@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="caseMilestone">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>VB Milestones</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="recordId" default="{!recordId}" type="String" label="Record ID" description="The ID of the case to display milestones for."/>
+            <property name="object"  type="String" label="Select the Object" datasource="apex://MilestoneServiceObjectChoice"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

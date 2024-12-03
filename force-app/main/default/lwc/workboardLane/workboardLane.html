@@ -1,0 +1,29 @@
+<template>
+    <div class="" style="height: 100%;">
+        <div class="header-column" role="application">
+            <div class="col-header slds-truncate" style={PathStyle}>
+                {status}  ({getCount})      
+            </div>
+        </div>
+            <div class="slds-col slds-lane slds-has-dividers-around-space slds-scrollable_y dropZone" 
+                data-id={status}
+                ondrop={handleDrop}
+                data-role="drop-target"
+                ondragover={handleDragOver}
+                ondragleave={handleDragLeave}
+                style=""
+                onscroll={onScroll}>
+                    <template for:each={records} for:item="recordItem">
+                        <c-workboard-card class="card" status={status}
+                                            record={recordItem} draggable="true"
+                                            onitemdrag={handleItemDrag} onloaded={handleLoaded}
+                                            onchild={handleChild} key={recordItem.Id}
+                                            colorsettings={colorsettings} sobject={sobject}>
+                        </c-workboard-card>
+                    </template>
+                    <br/><br/><br/>                           
+            </div>
+        
+
+    </div>
+</template>

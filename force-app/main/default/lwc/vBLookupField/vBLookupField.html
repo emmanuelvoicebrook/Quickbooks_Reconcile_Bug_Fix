@@ -1,0 +1,89 @@
+<template>
+    <div style="margin-bottom:10px !important">
+        <template if:false={contactSelected}>
+            <div class="slds-form-element ignore-click">
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+                            data-id="contact_control">
+
+                            <div class="slds-combobox__form-element " role="none">
+                                <lightning-input id="contact" name="search" type="search" label={label}
+                                    required={required} autocomplete="off" onchange={handleSearch}
+                                    aria-controls="listbox-id-2" disabled={disabled} onfocus={handleFocus}>
+                                </lightning-input>
+                            </div>
+                            <div id="listbox-id-2" data-id="listbox"
+                                class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={comboboxList} for:item="contact">
+                                        <li role="presentation" class="slds-listbox__item" key={contact.Id}
+                                            data-id={contact.Id} onclick={handleSelection}>
+                                            <div id={contact.Id}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option">
+                                                <span class="slds-media__figure slds-listbox__option-icon">
+                                                    <lightning-icon icon-name={iconName} size="x-small"
+                                                        class="slds-input__icon slds-input__icon_right"></lightning-icon>
+                                                </span>
+                                                <span class="slds-media__body">
+                                                    <span
+                                                        class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                        {contact.Name}
+                                                    </span>
+                                                    <span
+                                                        class="slds-listbox__option-meta slds-listbox__option-meta_entity">
+                                                        {contact.sub_text}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:true={contactSelected}>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="combobox-id-5" id="combobox-label-id-32">{label}</label>
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container slds-has-selection">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right"
+                                role="none">
+                                <lightning-icon icon-name={iconName} size="small"
+                                    class=" slds-combobox__input-entity-icon">
+                                </lightning-icon>
+                                <!-- <button type="button"
+                                    class="slds-input_faux slds-combobox__input slds-combobox__input-value"
+                                    aria-labelledby="combobox-label-id-32 combobox-id-5-selected-value"
+                                    style="border: none;" id="combobox-id-5-selected-value" aria-controls="listbox-id-5"
+                                    aria-expanded="false" aria-haspopup="listbox">
+                                    <span class="slds-truncate" id="combobox-value-id-19">{selectedValue}</span>
+                                </button> -->
+                                <div role="combobox" tabindex="0"
+                                    class="slds-input_faux slds-combobox__input slds-combobox__input-value"
+                                    aria-labelledby="combobox-label-id-36 combobox-id-5-selected-value"
+                                    id="combobox-id-5-selected-value" aria-controls="listbox-id-5"
+                                    aria-expanded={isExpanded} aria-haspopup="listbox" onclick={toggleDropdown}>
+                                    <span class="slds-truncate" id="combobox-value-id-23">{selectedValue}</span>
+                                </div>
+                                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                    title="Remove selected option" onclick={clearSelection}>
+                                    <lightning-button variant="base" label="" onclick={clearSelection}
+                                        icon-name="utility:close" class="">
+                                    </lightning-button>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+</template>

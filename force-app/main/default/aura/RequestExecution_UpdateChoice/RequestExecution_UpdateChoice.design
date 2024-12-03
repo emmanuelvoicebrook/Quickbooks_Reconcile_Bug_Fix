@@ -1,0 +1,6 @@
+<design:component>
+    <design:attribute name="caseStatus" label="Case Status" description="Status of the Case Record being Updated"/>
+    <design:attribute name="selectedOption" label="Selected Option" description="The value of the selected choice"/>
+    <design:attribute name="hasError" label="Error" description="True if there is an error in the component"/>
+    <design:attribute name="errorMessage" label="Error Message" description="Contains the error message."/>
+</design:component>

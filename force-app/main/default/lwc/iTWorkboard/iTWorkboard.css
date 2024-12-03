@@ -1,0 +1,313 @@
+/* General Styles */
+.slds-card {
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.dark {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+.dark .slds-card {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.dark .slds-card__header {
+    background-color: #2d3748;
+    border-bottom: 1px solid #4a5568;
+}
+
+.dark .slds-card__body {
+    background-color: #2d3748;
+}
+
+.dark .slds-card__footer {
+    background-color: #2d3748;
+    border-top: 1px solid #4a5568;
+}
+
+.slds-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+li.slds-item {
+    padding: 0 !important;
+    margin: 0.5rem;
+}
+
+.slds-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Workboard Specific */
+.workboard,
+.workboard-container {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.workboard-content {
+    flex: 1;
+    padding-bottom: 60px; /* Space for the add button */
+}
+
+.workboard .column-card,
+.workboard-container .column-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure column-card takes full height */
+}
+
+/* Dark Theme Styles for Column Cards */
+.dark .column-card {
+    background-color: #2a2f3d; /* Slightly lighter shade for the card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: none; /* Remove the border */
+    border-radius: 8px; /* Soft rounded corners */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .column-card:hover {
+    background-color: #323744; /* Slightly darker shade on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.workboard-container .column-card {
+    height: calc(100vh - 200px); /* Set a fixed height relative to viewport */
+}
+
+.workboard-container .slds-card__body {
+    flex-grow: 1;
+    overflow-y: auto; /* Scrolling only inside the card body */
+}
+
+.workboard .slds-item,
+.workboard-container .slds-item {
+    margin-bottom: 0.5rem;
+}
+
+.workboard .slds-tile,
+.workboard-container .slds-tile {
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+
+/* Color Key */
+.color-key {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+    padding: 0 0.5rem;
+}
+
+.color-key span {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+}
+
+/* Record Type Colors */
+.bg-red-100 {
+    background-color: #FED7D7;
+    border-color: #FEB2B2;
+}
+
+.bg-blue-100 {
+    background-color: #BEE3F8;
+    border-color: #90CDF4;
+}
+
+.bg-green-100 {
+    background-color: #C6F6D5;
+    border-color: #9AE6B4;
+}
+
+.bg-yellow-100 {
+    background-color: #FEFCBF;
+    border-color: #FAF089;
+}
+
+.dark .bg-red-900 {
+    background-color: #742A2A;
+    border-color: #9B2C2C;
+}
+
+.dark .bg-blue-900 {
+    background-color: #2A4365;
+    border-color: #2C5282;
+}
+
+.dark .bg-green-900 {
+    background-color: #22543D;
+    border-color: #276749;
+}
+
+.dark .bg-yellow-900 {
+    background-color: #744210;
+    border-color: #975A16;
+}
+
+.text-red-800 {
+    color: #9B2C2C;
+}
+
+.text-blue-800 {
+    color: #2C5282;
+}
+
+.text-green-800 {
+    color: #276749;
+}
+
+.text-yellow-800 {
+    color: #975A16;
+}
+
+.dark .text-red-200 {
+    color: #FEB2B2;
+}
+
+.dark .text-blue-200 {
+    color: #90CDF4;
+}
+
+.dark .text-green-200 {
+    color: #9AE6B4;
+}
+
+.dark .text-yellow-200 {
+    color: #FAF089;
+}
+
+.bg-red-700 {
+    background-color: #b91c1c;
+}
+
+.bg-blue-700 {
+    background-color: #1d4ed8;
+}
+
+.bg-green-700 {
+    background-color: #15803d;
+}
+
+.bg-amber-700 {
+    background-color: #b45309;
+}
+
+/* Color Key (light version) */
+.bg-red-700 {
+    background-color: #fecaca;
+    color: #991b1b;
+}
+
+.bg-blue-700 {
+    background-color: #bfdbfe;
+    color: #1e40af;
+}
+
+.bg-green-700 {
+    background-color: #bbf7d0;
+    color: #15803d;
+}
+
+.bg-amber-700 {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Scrollbar Styles */
+.slds-scrollable_y {
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1e293b;
+}
+
+.slds-scrollable_y::-webkit-scrollbar {
+    width: 6px;
+}
+
+.slds-scrollable_y::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.slds-scrollable_y::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
+/* Remove Scrollbar Arrows */
+.slds-scrollable_y::-webkit-scrollbar-button {
+    display: none; /* Hides the scrollbar arrows */
+}
+
+.dark .slds-scrollable_y {
+    scrollbar-color: #4A5568 #2D3748;
+}
+
+.dark .slds-scrollable_y::-webkit-scrollbar-track {
+    background: #2D3748;
+}
+
+.dark .slds-scrollable_y::-webkit-scrollbar-thumb {
+    background-color: #4A5568;
+    border-radius: 6px;
+    border: 3px solid #2D3748;
+}
+
+/* Input and Button Styles */
+.slds-input,
+.slds-button,
+.slds-button_icon {
+    color: #e2e8f0;
+    background-color: #334155;
+    border-color: #475569;
+}
+
+.slds-input::placeholder {
+    color: #94a3b8;
+}
+
+.slds-button:hover,
+.slds-button_icon:hover {
+    background-color: #475569;
+}
+
+.slds-button_brand {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.slds-button_brand:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* Footer Styles */
+.slds-docked-form-footer {
+    background-color: #0f172a;
+    border-top: 1px solid #334155;
+    padding: 0.5rem 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.add-new-item-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}

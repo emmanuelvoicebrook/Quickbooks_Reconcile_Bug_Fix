@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <div class="main">
+    	<c:workboard/>
+    </div>
+</aura:component>

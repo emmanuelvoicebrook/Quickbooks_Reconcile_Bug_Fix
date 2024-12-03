@@ -1,0 +1,5 @@
+<apex:page standardController="Contact">
+    <flow:interview name="Case_Management_Create_Case" finishLocation="closeWin">
+       <apex:param name="StartingRecordID" value="{!Contact.Id}"/>
+    </flow:interview>
+</apex:page>

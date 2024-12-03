@@ -1,0 +1,26 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="CommunityCaseController" access="global" >
+
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="flowApiName" type="String" default="Case_Management_Schedule_Training_Community"/>
+    <aura:attribute name="isButtonDisabled" type="Boolean" default="true"/>
+    <aura:attribute name="showButton" type="Boolean" default="false"/>
+    <aura:attribute name="modalReference" type="Object"/>
+
+    <!-- Aura handler to call doInit on initialization -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- using the same event as case coomment component to get notified of closure -->
+    <aura:handler event="c:CaseCommentCreatedEvent" action="{!c.refreshPage}" />
+    
+    <!-- Overlay library for modal -->
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <!-- Button container for right alignment, button only shows if showButton is true -->
+    <aura:if isTrue="{!v.showButton}">
+       <div class="button-container" style="text-align: right;margin-top: 20px;">
+            <!-- Button to trigger the flow in a modal, disabled initially -->
+            <lightning:button variant="brand" label="Schedule Training" onclick="{!c.openModal}" disabled="{!v.isButtonDisabled}" />
+        </div> 
+    </aura:if>
+
+</aura:component>

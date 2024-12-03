@@ -1,0 +1,47 @@
+.logo {
+    display: none; /* Hide both logos by default */
+}
+
+.large-logo {
+    display: block; /* Show the large logo by default */
+}
+
+.banner-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.banner{
+    margin: 0.5em 2em;
+}
+
+.vb-link{
+    display: contents;
+    height: 100%;
+}
+.link-profile{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+@media (max-width: 1024px) {
+    .large-logo {
+        display: none; /* Hide the large logo on smaller screens */
+    }
+    .small-logo {
+        display: block; /* Show the small logo on smaller screens */
+    }
+
+}
+
+@media (min-width: 64em){
+    .banner-container{
+        width: 66.67%;
+    }
+
+    .banner{
+        display: flex;
+        justify-content: center;
+        margin: 1 rem;
+    }
+}

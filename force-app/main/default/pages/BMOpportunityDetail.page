@@ -1,0 +1,3 @@
+<apex:page standardController="Billable_Milestone__c" >
+   <apex:detail subject="{!Billable_Milestone__c.Opportunity__c}" relatedList="true" title="false"/>
+</apex:page>

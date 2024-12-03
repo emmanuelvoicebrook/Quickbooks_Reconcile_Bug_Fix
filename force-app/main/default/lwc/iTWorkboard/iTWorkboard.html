@@ -1,0 +1,174 @@
+<template>
+    <div class="workboard-container">
+        <div class="workboard-content">
+            <div class="slds-card__header slds-grid slds-grid_vertical-align-center slds-p-around_medium">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span class="slds-text-heading_medium">{header}</span>
+                        </h2>
+                    </div>
+                </header>
+                <div class="slds-no-flex slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+                    <lightning-input class="slds-m-right_small" type="search" label="Search" placeholder="Search..." onchange={handleRecordSearch}></lightning-input>
+                    <lightning-button-icon icon-name="utility:filter" alternative-text="Filter" title="Filter" onclick={openSettings}></lightning-button-icon>
+                    <lightning-button-icon icon-name="utility:settings" alternative-text="Settings" title="Settings" onclick={openColumnSelector}></lightning-button-icon>
+                </div>
+                
+            </div>
+
+            <!-- Color Key -->
+            <div class="slds-p-around_medium color-key">
+                <template for:each={recordTypeColors} for:item="rtColor">
+                    <span key={rtColor.type} class={rtColor.color}>{rtColor.type}</span>
+                </template>
+            </div>
+
+            <div class="slds-card__body">
+                <div class="slds-grid slds-scrollable_x" style="width: 100%; overflow-x: auto;">
+                    <template for:each={columnsArray} for:item="column">
+                        <template if:true={column.visible}>
+                            <div key={column.id} class="slds-col slds-size_1-of-6 slds-p-horizontal_xx-small">
+                                <article class="slds-card column-card" data-column-id={column.id}>
+                                    <div class="slds-card__header slds-grid">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <span class="slds-text-heading_small">{column.title} ({column.items.length})</span>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-card__body slds-scrollable_y" ondragover={handleDragOver} ondrop={handleDrop} data-column-id={column.id}>
+                                        <ul class="slds-has-dividers_around-space">
+                                            <template for:each={column.items} for:item="item">
+                                                <li key={item.Id} class="slds-item" draggable="true" ondragstart={handleDragStart} data-id={item.Id}>
+                                                    <article class={item.colorClass}>
+                                                        <h3 class="slds-tile__title slds-truncate" title={item.Name}>
+                                                            <a href={item.Id}>{item.Name}</a>
+                                                        </h3>
+                                                        <div class="slds-tile__detail">
+                                                            <p class="slds-text-body_small">Type: {item.RecordType.Name}</p>
+                                                            <p class="slds-text-body_small">Asset: {item.VB_Asset_Type__c}</p>
+                                                            <p class="slds-text-body_small">Assigned To: {item.Owner.Name}</p>
+                                                            <p class="slds-text-body_small">Priority: {item.Priority__c}</p>
+                                                        </div>
+                                                    </article>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </article>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div class="add-new-item-container">
+            <lightning-button label="+ Add New Item" title="Add New Item" onclick={newCase} variant="brand"></lightning-button>
+        </div>
+    </div>
+
+    <!-- New Item Modal -->
+    <template if:true={isCreateNewCaseOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeNewCaseForm}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New Work Item</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-flow flow-api-name={RecordCreationFlow}
+                                    flow-input-variables={flowParamsJSON}
+                                    onstatuschange={closeNewCaseForm}>
+                    </lightning-flow>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Filter Modal -->
+    <template if:true={isSettingOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true" aria-describedby="modal-content-id-3" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeSettings}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Filters</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <!-- Filter content here -->
+                    <div class="slds-form slds-form_stacked">
+                        <lightning-combobox name="requestedBy" label="Requested By" value={filters.requestedBy} options={requestedByUsers} onchange={handleFilterChange}></lightning-combobox>
+                        <lightning-combobox name="requestedFor" label="Requested For" value={filters.requestedFor} options={requestedForUsers} onchange={handleFilterChange}></lightning-combobox>
+                        <lightning-combobox name="assignedTo" label="Assigned To" value={filters.assignedTo} options={assignedToUsers} onchange={handleFilterChange}></lightning-combobox>
+                        <lightning-combobox name="priority" label="Priority" value={filters.priority} options={priority} onchange={handleFilterChange}></lightning-combobox>
+                        <lightning-combobox name="assetType" label="Asset Type" value={filters.assetType} options={assets} onchange={handleFilterChange}></lightning-combobox>
+                        <lightning-input type="date" name="createdDate" label="Created Date" value={filters.createdDate} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="date" name="closedDate" label="Closed Date" value={filters.closedDate} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="checkbox" label="Show Overdue Items" name="showOverdue" checked={filters.showOverdue} onchange={handleFilterChange}></lightning-input>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="record-types">Record Types</label>
+                            <div class="slds-form-element__control">
+                                <template for:each={recordTypes} for:item="recordType">
+                                    <lightning-input 
+                                        key={recordType.value}
+                                        type="checkbox" 
+                                        label={recordType.label}
+                                        name={recordType.value}
+                                        checked={recordType.isChecked}
+                                        onchange={handleRecordTypeChange}>
+                                    </lightning-input>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={resetFilters}>Reset Filters</button>
+                    <button class="slds-button slds-button_brand" onclick={applyFilters}>Apply Filters</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Column Selector Modal -->
+    <template if:true={isColumnSelectorOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-04" aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeColumnSelector}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">Toggle Column Visibility</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4">
+                    <template for:each={columnsArray} for:item="column">
+                        <div key={column.id} class="slds-form-element">
+                            <lightning-input 
+                                type="checkbox" 
+                                label={column.title}
+                                name={column.id}
+                                checked={column.visible}
+                                onchange={handleColumnToggle}>
+                            </lightning-input>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={closeColumnSelector}>Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

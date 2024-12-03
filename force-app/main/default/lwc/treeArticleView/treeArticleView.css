@@ -1,0 +1,10 @@
+@media (max-width: 576px) {
+    .accordion-control {
+        display: none;
+    }
+
+    .control-view{
+        padding: 0 !important;
+        width: 100% !important;
+    }
+}

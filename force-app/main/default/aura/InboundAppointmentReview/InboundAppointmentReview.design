@@ -1,0 +1,13 @@
+<design:component>
+    <design:attribute name="AppointmentType" label="Appointment Type" />
+    <design:attribute name="Account" label="Account" />
+    <design:attribute name="CaseNumber" label="Case Number" />
+    <design:attribute name="Comment" label="Comment" />
+    <design:attribute name="FirstName" label="First Name" />
+    <design:attribute name="LastName" label="Last Name" />
+    <design:attribute name="Email" label="Email" />
+    <design:attribute name="Phone" label="Phone" />
+    <design:attribute name="SchedStartTime" label="Scheduled Start Time" />
+    <design:attribute name="SchedEndTime" label="Scheduled End Time" />
+    <design:attribute name="TimeZone" label="Time Zone" />
+</design:component>

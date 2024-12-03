@@ -1,0 +1,3 @@
+<apex:page standardController="Opportunity">
+    {!Opportunity.Next_Steps__c}
+</apex:page>

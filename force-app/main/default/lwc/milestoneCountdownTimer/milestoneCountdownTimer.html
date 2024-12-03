@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_6-of-7">
+            <!-- <a  class="milestones-item" title={activeMilestone.MilestoneType.Name} data-id={activeMilestone.Id} onclick={handleClick} >{activeMilestone.MilestoneType.Name}</a><br> -->
+            <a  class="milestones-item" title={activeMilestone.MilestoneType.Name} data-id={activeMilestone.Id} >{activeMilestone.MilestoneType.Name}</a><br>
+            <template if:true={isOverdue}>
+                <p class="milestone-timer-text-overdue">
+                    <template if:true={daysRemaining}>
+                        {daysRemaining} day(s) &nbsp;
+                    </template>
+                    <template if:true={hoursRemaining}>
+                        {hoursRemaining} hr(s) &nbsp;
+                    </template>
+                    <template if:true={minutesRemaining}>
+                        {minutesRemaining} min(s) &nbsp;
+                    </template>
+                    {secondsRemaining} sec(s) overdue
+                </p>
+            </template>
+            <template if:false={isOverdue}>
+                <p class="milestone-timer-text">
+                    <template if:true={daysRemaining}>
+                        {daysRemaining} day(s) &nbsp;
+                    </template>
+                    <template if:true={hoursRemaining}>
+                        {hoursRemaining} hr(s) &nbsp;
+                    </template>
+                    <template if:true={minutesRemaining}>
+                        {minutesRemaining} min(s) &nbsp;
+                    </template>
+                    {secondsRemaining} sec(s) remaining
+                </p>
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-7">
+            <div class="slds-grid slds-grid_align-end" style="margin-right:.5rem;margin-top:0.5rem;">
+                <template if:true={isOverdue}>
+                    <lightning-icon icon-name="utility:error" size="xx-small" variant="error"></lightning-icon>
+                </template>
+                <template if:false={isOverdue}>
+                    <lightning-progress-ring value={progressPercentage}></lightning-progress-ring>
+                </template>
+
+            </div>
+        </div>
+    </div>
+</template>

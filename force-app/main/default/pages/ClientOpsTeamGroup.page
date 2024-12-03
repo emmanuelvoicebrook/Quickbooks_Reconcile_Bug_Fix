@@ -1,0 +1,5 @@
+<apex:page standardController="CollaborationGroup">
+    <apex:outputPanel layout="block" style="overflow:auto; height:540px; width:500px; margin:0 1px">
+    <chatter:feed entityId="0F98000000009PLCAY"/>
+    </apex:outputPanel>
+</apex:page>

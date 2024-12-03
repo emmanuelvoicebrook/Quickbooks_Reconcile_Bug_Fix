@@ -1,0 +1,20 @@
+<aura:component controller="CommunityCaseCommentsRelatedList" implements="flexipage:availableForAllPageTypes,force:appHostable,force:hasRecordId,lightning:actionOverride">
+    <aura:attribute name="caseId" type="Id"/>
+    <aura:attribute name="externalComments" type="String"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+
+    <aura:registerEvent name="closeModal" type="c:CaseCommentCreatedEvent" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
+
+    <lightning:inputRichText label="Comment" value="{!v.externalComments}" />
+    <br/>
+    <hr/>
+    <div class="slds-grid slds-grid_align-end">
+        <lightning:button label="Cancel" onclick="{!c.handleCancel}" variant="neutral" />
+        <lightning:button label="Save" onclick="{!c.handleSave}" variant="brand" />
+    </div>
+
+    <aura:if isTrue="{!v.isLoading}">
+        <lightning:spinner alternativeText="Loading" size="medium" variant="brand"/>
+    </aura:if>
+</aura:component>

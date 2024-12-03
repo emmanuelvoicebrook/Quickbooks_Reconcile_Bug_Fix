@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>VB Dependent Picklist</masterLabel>
+
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="objectApiName" label="Object API Name" type="String" role="inputOnly" description="The API name of the object that you are working with"/>
+            <property name="recordTypeId" label="Record Type Id" type="String" role="inputOnly" description="The Record Type Id that you are working with"/>
+            <property name="controllingFieldApiName" label="Controlling/Main Field API Name" type="String" role="inputOnly" description="The API name of the controlling field"/>
+            <property name="dependentFieldApiName" label="Dependent Field API Name" type="String" role="inputOnly"  description="The API name of the dependent field"/>
+            <property name="controllingFieldLabel" label="Controlling/Main Field Label" type="String" role="inputOnly" description="The label that you want to appear for the controlling picklist"/>
+            <property name="dependentFieldLabel" label="Dependent Field Label" type="String" role="inputOnly" description="The label that you want to appear for the dependent picklist(Optional)"/>
+            <property name="displayMode" label="Display Mode" type="String" role="inputOnly" description="Radio or Picklist" />
+            <property name="required" type="Boolean" label="Required" role="inputOnly" description="Is the field required?"/>
+            <property name="displayOrientation" label="Display Orientation" type="String" role="inputOnly" description="Layout orientation: Vertical or Horizontal"/>
+            <property name="mainValue" label="Controller Field Value" type="String" role="outputOnly" description="The value of the main picklist will be saved here"/>
+            <property name="dependentValue" label="Dependent Field Value" type="String" role="outputOnly" description="The value of the dependent picklist will be saved here"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

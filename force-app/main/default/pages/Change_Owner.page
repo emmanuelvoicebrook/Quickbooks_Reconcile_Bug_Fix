@@ -1,0 +1,6 @@
+<apex:page standardController="Case">
+    <flow:interview name="Assign_Ownership" finishLocation="closeWin">
+           <apex:param name="Case_ID" value="{!Case.Id}"/>
+           <apex:param name="Current_user_ID" value="{!$User.Id}"/>
+    </flow:interview>
+</apex:page>

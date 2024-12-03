@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Your Account Files">
+        <template if:true={files}>
+            Displaying Files
+            <lightning-layout multiple-rows>
+                <template for:each={files} for:item="file">
+                    <lightning-layout-item key={file.Id} size="12">
+                        <div class="slds-p-around_small slds-border_bottom">
+                            <p class="slds-text-heading_small">{file.Title}</p>
+                            <template if:true={file.previewUrl}>
+                                <lightning-button
+                                    label="Preview"
+                                    variant="brand"
+                                    data-url={file.previewUrl}
+                                    onclick={handlePreview}
+                                ></lightning-button>
+                            </template>
+                            <lightning-button
+                                label="Download"
+                                variant="neutral"
+                                data-url={file.downloadUrl}
+                                onclick={handleDownload}
+                            ></lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+        <template if:true={error}>
+            <div class="slds-text-color_error">Error : {error}</div>
+        </template>
+        <template if:true={showFiles}>
+            <p>You have no files in this library.</p>
+        </template>
+    </lightning-card>
+</template>

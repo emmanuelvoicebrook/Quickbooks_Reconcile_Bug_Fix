@@ -1,0 +1,6 @@
+<apex:page standardController="Case">
+    <flow:interview name="Update_Ticket" finishLocation="/{!Case.Id}">
+       <apex:param name="TicketID" value="{!Case.Id}"/>
+       <apex:param name="CurrentUserID" value="{!$User.Id}"/> 
+    </flow:interview>
+</apex:page>

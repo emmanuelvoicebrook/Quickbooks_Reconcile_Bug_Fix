@@ -1,0 +1,46 @@
+<!-- Screen1_AccountAndImplementationSelection.cmp -->
+<aura:component controller="VB_SignatureController">
+    <aura:attribute name="selectedAccount" type="String" />
+    <aura:attribute name="selectedImplementation" type="String" />
+    <aura:attribute name="implementations" type="List" />
+
+
+    <aura:handler name="onchange" event="l_lookup:OnChange" action="{!c.handleChange}" />
+
+
+    <aura:registerEvent name="next" type="c:Signature_NextEvent" />
+
+    <!-- Lookup for Account -->
+    <!-- Use your custom lookup component here -->
+    <div class="main">
+        <div class="fields">
+            <i>Please select an account and implementation below:</i> <br/>
+            <l_lookup:Lookup objectType="Account" selectedRecordId="{!v.selectedAccount}" />
+            <!-- Once an account is selected, implementations are loaded -->
+
+            <br />
+            <aura:if isTrue="{!empty(v.selectedAccount) }">
+                <strong>You need select an Account for the Implementations to appear.</strong>
+
+                <aura:set attribute="else">
+                    <lightning:radioGroup name="implementationSelect" label="Select an Implementation"
+                        aura:id="implementationSelect" disabled="{!empty(v.selectedAccount)}"
+                        options="{!v.implementations}" value="{!v.selectedImplementation}">
+                    </lightning:radioGroup>
+                </aura:set>
+            </aura:if>
+            <br />
+        </div>
+        <div class="footer">
+            <hr />
+            <div class="buttons slds-clearfix">
+                <div class="slds-float_right">
+                    <lightning:button label="Next" onclick="{!c.goToNext}" variant="brand"
+                        disabled="{!empty(v.selectedImplementation) }" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</aura:component>

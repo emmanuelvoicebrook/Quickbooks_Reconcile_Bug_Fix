@@ -1,0 +1,4 @@
+<design:component label="Unsubscribe Experience Flow Housing">
+    <design:attribute name="recordId" label="Record Id"/>
+    <design:attribute name="email" label="Email" />
+</design:component>

@@ -1,0 +1,9 @@
+<apex:page StandardController="Contact">   
+2
+    <script type="text/javascript">
+3
+        window.location = '/{!Contact.AccountId}/m?isdtp=vw';
+4
+    </script>
+5
+</apex:page>

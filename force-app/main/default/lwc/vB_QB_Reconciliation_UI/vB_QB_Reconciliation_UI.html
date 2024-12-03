@@ -1,0 +1,87 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={loading}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true">
+            <div class="slds-modal__container">
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <template if:true={pageReady}>
+        <lightning-card title="Quickbooks Reconcile">
+            <template if:true={reconcile_in_progress}>
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Let users close the modal using the 'Finish' button -->
+                      <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" class="closeButton"></lightning-icon>
+                      </button> -->
+                      <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Quickbooks Reconcile Progress</h1>
+                      </div>
+                      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!-- <lightning-progress-bar value={reconcile_progress} size="large" variant="circular"></lightning-progress-bar>
+                        {reconcile_status} -->
+                        <c-v-b_-q-b_-progress_-bar size="large" variant="circular"
+                            container-class="slds-p-left_large slds-p-right_large" section-header="Quickbooks Reconcile Progress"
+                            hide-when-process-complete=false freeze-when-process-fails=true partial-failure-sticky-banner=true
+                            initial-sobject-record={accountObj} use-push-topic-event=true push-topic-name="QuickbooksReconciliation"
+                            record-id={reconciliationRecordId} total-count-field-name="Previous_Upload_Total_Count__c"
+                            success-count-field-name="Previous_Upload_Success_Count__c"
+                            status-field-name="Previous_Upload_Status__c" onfinish={handleFinish}>
+                        </c-v-b_-q-b_-progress_-bar>
+    
+                      </div>
+                    </div>
+                  </section>
+                  <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </template>
+            <span class="title" slot="title">Quickbooks Reconcile</span>
+            <div class="content">
+                <lightning-input 
+                            label="Invoices CSV File"
+                            name="invoices"
+                            type="file"
+                            accept=".csv"
+                            id="upload"
+                            multiple="false"
+                            disabled={papaReady}
+                            onchange={handleFileChange}>
+                </lightning-input>
+            </div>
+            <br/>
+            <div class="date">
+                <template if:true={lastReconcileRecord}>
+                    <span>
+                        <span style="font-weight:600">Last Reconcile: </span> {getLastReconcileDate}
+                    </span> 
+                </template>
+            </div>
+            <div class="information">
+                <template if:true={recordsReadyToView}>
+                    <c-v-b_-q-b_-record_-table records={rows}></c-v-b_-q-b_-record_-table>
+    
+                    <div class="buttons">
+                        <lightning-button 
+                            label="Reconcile"
+                            variant="brand"
+                            class="button"
+                            onclick={handleReconcile}>
+                        </lightning-button>
+                        <lightning-button 
+                            label="Cancel"
+                            variant="neutral"
+                            class="button"
+                            onclick={handleCancel}>
+                        </lightning-button>
+    
+                    </div>
+                </template>
+            </div>
+    
+        </lightning-card>
+
+    </template>
+</template>

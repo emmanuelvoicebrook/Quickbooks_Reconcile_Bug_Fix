@@ -1,0 +1,53 @@
+<template>
+    <div>
+        <label class="slds-form-element__label" for="combobox-unique-id-3">{label}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div class={dropdown} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox" onblur={closeDropDown}>
+                   
+                   <!--code for input and dropdown icon-->
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value"
+                                onclick={openDropdown} readonly/>
+                        <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right" title="Down icon">
+                            <lightning-icon icon-name="utility:down" size="xx-small" class="slds-icon-text-default" ></lightning-icon>
+                            <span class="slds-assistive-text">Down icon</span>
+                        </span>            
+                    </div>
+                  
+
+      
+                    <div id="listbox-unique-id" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation">
+                            <div class="slds-scrollable">
+                                 <!-- code to show list of options  -->
+                                <template for:each={options} for:item="item">  
+                                    <li key = {item.label} role="presentation" class="option slds-listbox__item">
+                                         <div  data-check="false" data-name={item.label} onclick={selectOption} class={item.class} role="option">
+                                            
+                                            <span class="slds-media__body">
+                                                    <span class="slds-truncate" style="color:black;" title={item.label}> {item.label}</span>
+                                            </span>
+                                        </div> 
+                                    </li>
+                                </template>
+                            </div>
+                        </ul>
+                    </div>
+
+
+                </div>   
+            </div>
+        </div>
+        <!-- <lightning-combobox value={getValueDetails} options={options} label={label} onchange={selectOption}></lightning-combobox> -->
+ 
+        <template for:each={selectedListOfValues} for:item="option">   
+            <span key={option}>
+            <lightning-pill label={option} name={option} class="slds-m-around_xx-small" onremove={removeRecord}>
+            </lightning-pill>
+            </span>
+        </template>
+       
+    </div>
+    
+</template>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>3rd Party Picklist-Number Collector</masterLabel>
+
+    
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="picklistLabel" label="Picklist Field Label" type="String" role="inputOnly" description="The label to appear for the picklist"></property>
+            <property name="numberLabel" label="Number Field Label" type="String" role="inputOnly" description="The label to appear for the numeric field" ></property>
+            <property name="dateLabel" label="Date Field Label" type="String" role="inputOnly" description="The label to appear for the date field" ></property>
+
+            <!-- required -->
+            <property name="required" label="Required" type="Boolean" ></property>
+            <property name="entry_data" label="Entry Data" type="apex://x3rdPartyOrderData[]" description="Entry Data"></property>
+            <property name="picklistData" label="Picklist Data" type="apex://ProductInfo[]" role="inputOnly" description="The product info list of the options you want on the picklist"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

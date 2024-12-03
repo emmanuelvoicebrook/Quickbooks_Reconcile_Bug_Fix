@@ -1,0 +1,10 @@
+.THIS {
+}
+.THIS .listViewTitle>a {
+    pointer-events: none;
+    cursor: default;
+    color: black;
+}
+.THIS .countSortedByFilteredBy{
+    display : none !important;
+}

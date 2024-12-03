@@ -1,0 +1,235 @@
+<template>
+    <div class="body" onremovefield={handleRemovedField} ondragleave={handleDragLeave} ondragover={handleDragOver} ondragstart={handleDragStart}>
+        
+        <div class="error">
+            <template if:true={error}>
+                <ul>
+                    <template for:each={errorMessages} for:item="error">
+                        <li style="list-style: inside;" key={error}>{error}</li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+        <div class="main-section">
+            <lightning-input label="Field Label"
+                            name="Field Label"
+                            value={rowData.fieldLabel}
+                            onchange={handleChange}
+                            data-name="fieldLabel"
+                            required
+                            class="row-field">
+            </lightning-input>
+            <lightning-input label="Field Name"
+                            name="Field Name"
+                            value={rowData.fieldName}
+                            onchange={handleChange}
+                            required
+                            data-name="fieldName"
+                            class="row-field">
+            </lightning-input>
+            <lightning-combobox label="Field Type"
+                                name="fieldType"
+                                value={rowData.fieldType}
+                                onchange={handleChange}
+                                options={typeOptions}
+                                data-name="fieldType"
+                                required
+                                class="row-field"
+                                style="width: 16em;">
+            </lightning-combobox>
+            <lightning-input label="Field Help Text"
+                            name="fieldDescription"
+                            value={rowData.fieldDescription}
+                            onchange={handleChange}
+                            data-name="fieldDescription"
+                            class="row-field">
+            </lightning-input>
+            <div class="slds-form-element required">
+                <label class="slds-form-element__label" for="checkbox" style="font-weight: 400;">Required</label>
+                <div class="slds-form-element__control">
+                  <span class="slds-checkbox slds-checkbox_standalone">
+                    <input type="checkbox" id="checkbox" onchange={handleRequired} name="label" checked={IsRequired} />
+                    <span class="slds-checkbox_faux"></span>
+                  </span>
+                </div>
+            </div>
+            <div class="delete">
+                <lightning-icon icon-name="action:delete" size="small" alternative-text="delete" title="delete" class="remove-field" onclick={handleRemoveField}></lightning-icon>
+            </div>
+            <div class="chevrons">
+                <template if:true={showUpChevron}>
+                    <div class="chevron" onclick={handleUpChevron}>
+                        <lightning-icon icon-name="utility:chevronup" alternative-text="chevronup" title="chevronup"  size="x-small"></lightning-icon>
+                    </div>
+                </template>
+
+                <template if:true={showDownChevron}>
+                    <div class="chevron" onclick={handleDownChevron}>
+                        <lightning-icon icon-name="utility:chevrondown" alternative-text="chevrondown" title="chevronup"  size="x-small"></lightning-icon>
+                    </div>                    
+                </template>
+                
+            </div>
+        </div>
+        <div class="">
+            <template if:true={IsSFPicklist}>
+                <div class="sub-section">
+                    <div class="header-section" id="sf-picklist" data-info="sf-picklist"  onclick={handleToggle}> 
+                        <div class="text-section">
+                            <span class="title">Salesforce Picklist Configuration </span>
+                        </div>
+                        <div class="chevron">
+                            <template if:false={IsSFPicklistVisible}>
+                                <lightning-icon icon-name="utility:chevrondown" alternative-text="chevrondown" title="ChevronDown" size="x-small"></lightning-icon>
+                            </template>
+                            <template if:true={IsSFPicklistVisible}>
+                                <lightning-icon icon-name="utility:chevronup" alternative-text="chevronup" title="ChevronUp" size="x-small"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+                    <template if:true={IsSFPicklistVisible}>
+                        <div class="sfPicklistEntry">
+                            <c-v-b-search-combobox 
+                                    class="top-inputs"
+                                    fieldlabel="Object Name"
+                                    name="objectName"
+                                    value={rowData.SFPicklistData.objectName}
+                                    onchange={handleSFObjectChange}
+                                    options={objectOptions}
+                                    variant=""
+                                    style="margin-right: .5em"
+                                    required='true'
+                                ></c-v-b-search-combobox>
+                                <c-v-b-search-combobox 
+                                        class="top-inputs"
+                                        fieldlabel="Salesforce Field"
+                                        name="salesforceField"
+                                        value={rowData.SFPicklistData.fieldName}
+                                        onchange={handleSFFieldChange}
+                                        options={salesforceFieldOptions}
+                                        variant=""
+                                        required="true">
+                                </c-v-b-search-combobox>
+                        </div>
+                    </template>
+                </div>
+                
+                
+            </template>
+             
+            <template if:true={IsCustomPicklist}>
+                <div class="sub-section">
+                    <div class="header-section" id="custom-picklist" data-info="custom-picklist" onclick={handleToggle}>
+                        <div class="text-section">
+                            <span class="title">Custom Picklist Configuration</span>
+                            <span class="subtitle">Enter the picklist options that you want to be available for this field</span>
+                        </div>
+                        <div class="chevron">
+                            <template if:false={IsCustomPicklistVisible}>
+                                <lightning-icon icon-name="utility:chevrondown" alternative-text="chevrondown" title="ChevronDown" size="x-small"></lightning-icon>
+                            </template>
+                            <template if:true={IsCustomPicklistVisible}>
+                                <lightning-icon icon-name="utility:chevronup" alternative-text="chevronup" title="ChevronUp" size="x-small"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+    
+                    <template if:true={IsCustomPicklistVisible}>
+                        <template for:each={getPicklistData} for:item="option">
+                            <div key={option.value} class="customPicklistEntry">
+                                
+                                <!-- <lightning-input label="Label"
+                                                    name="label"
+                                                    value={option.label}
+                                                    onchange={handlePicklistOptionChange}
+                                                    data-name="picklistOptionsLabel"
+                                                    data-id={option.id}
+                                                    class="customPicklistEntry-field"
+                                                    style="margin-right: .5em"
+                                                    required>
+                                </lightning-input>
+                                <lightning-input label="Value"
+                                                    value={option.value}                                            
+                                                    onchange={handlePicklistOptionChange}
+                                                    data-name="picklistOptionsValue"
+                                                    data-id={option.id}
+                                                    required
+                                                    class="customPicklistEntry-field">
+                                </lightning-input>
+                                <a data-id={option.value}  onclick={handlePicklistOptionRemove}>
+                                    <lightning-icon data-id={option.value} 
+                                                    icon-name="action:delete" 
+                                                    size="x-small" 
+                                                    alternative-text="delete" 
+                                                    title="delete" 
+                                                    class="remove-field">
+                                    </lightning-icon>
+                                </a> -->
+                                <c-v-b-tabular-custom-picklist onremove={handlePicklistOptionRemove}
+                                                               value={option} onupdate={handlePicklistOptionChange}>
+                                </c-v-b-tabular-custom-picklist>
+                            </div>
+                        </template>
+                        <lightning-button label="Add"
+                                        onclick={handlePicklistOptionAdd}
+                                        data-name="picklistOptionsAdd">
+                        </lightning-button>
+                    </template>
+                    
+                </div>
+                
+            </template>
+
+            <template if:true={IsLookup}>
+                <div class="sub-section">
+                    <div class="header-section" id="lookup" data-info="lookup" onclick={handleToggle}>
+                    
+                        <div class="text-section">
+                            <span class="title">Lookup Field Configuration</span>
+                            <span class="subtitle">Cofigure information for the lookup field</span>
+                        </div>
+                        <div class="chevron">
+                            <template if:false={IsLookupVisible}>
+                                <lightning-icon icon-name="utility:chevrondown" alternative-text="chevrondown" title="ChevronDown" size="x-small"></lightning-icon>
+                            </template>
+                            <template if:true={IsLookupVisible}>
+                                <lightning-icon icon-name="utility:chevronup" alternative-text="chevronup" title="ChevronUp" size="x-small"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+    
+                    <template if:true={IsLookupVisible}>
+                        <div class="lookupEntry">
+                            <c-v-b-search-combobox 
+                                    class="top-inputs"
+                                    fieldlabel="Object Name"
+                                    name="lookupObject"
+                                    value={rowData.lookupData.objectName}
+                                    onchange={handleLookUpObjChange}
+                                    options={objectOptions}
+                                    variant=""
+                                    style="margin-right: .5em"
+                                    required
+                                ></c-v-b-search-combobox>
+                            <c-v-b-search-combobox 
+                                    class="top-inputs"
+                                    fieldlabel="Lookup Field"
+                                    name="lookupField"
+                                    value={rowData.lookupData.fieldName}
+                                    onchange={handleLookUpFieldChange}
+                                    options={lookupFieldOptions}
+                                    variant=""
+                                    required>
+                            </c-v-b-search-combobox> 
+                        </div>
+                    </template>
+                </div>
+                
+            </template>
+        </div>
+
+        
+    </div>
+
+
+</template>

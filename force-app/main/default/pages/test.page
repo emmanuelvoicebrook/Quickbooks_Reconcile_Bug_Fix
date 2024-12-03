@@ -1,0 +1,4 @@
+<apex:page standardcontroller="user">
+<apex:image value="{!User.smallphotourl}"/> <br/>
+<apex:image value="{!User.fullphotourl}"/> <br/>
+</apex:page>

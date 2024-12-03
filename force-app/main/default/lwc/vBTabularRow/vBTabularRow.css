@@ -1,0 +1,13 @@
+.fields{
+    display: flex;
+    flex-wrap: no-wrap;
+    /* min-height: 16em; */
+}
+
+.field{
+    margin-right: .6em;
+}
+
+.content{
+    width: 14em;
+}

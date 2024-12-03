@@ -1,0 +1,15 @@
+.c-picklist-content{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 0.5em;
+    flex-direction: row;
+}
+
+.remove{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: 0.5em;
+    padding-top: 1.1em;
+}

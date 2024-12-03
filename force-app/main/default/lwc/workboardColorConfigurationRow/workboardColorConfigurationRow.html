@@ -1,0 +1,15 @@
+<template>
+    <div class="row" style="display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-between;">
+        <lightning-input disabled="true" type="text" placeholder="Record Type" label="Record Type" value={_info.RecordType}></lightning-input>
+        <lightning-input disabled={disabled} type="color" onchange={colorChange} placeholder="Color" label="Color" value={_info.color}></lightning-input>
+        
+        
+        <!-- <div class="later" style="display: flex;">
+            <div class="apiInput" style="margin-right: 4.2em;">
+            </div>
+            
+        </div> -->
+    </div>
+</template>

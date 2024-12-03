@@ -1,0 +1,4 @@
+<apex:page standardController="Contact">
+    <apex:relatedList list="OpenActivities"/>
+    <apex:relatedList list="ActivityHistories"/>  
+</apex:page>

@@ -1,0 +1,16 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="CommunityCaseController" access="global">
+    <!-- Attributes -->
+    <aura:attribute name="flowApiName" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="modalReference" type="Object" />
+
+    <!-- using the same event as case coomment component to notify parent of closure -->
+    <aura:registerEvent name="closeModal" type="c:CaseCommentCreatedEvent" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
+    <!-- Flow component -->
+    <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}" />
+
+    <!-- Controller -->
+    <aura:handler name="init" value="{!this}" action="{!c.startFlow}" />
+
+</aura:component>

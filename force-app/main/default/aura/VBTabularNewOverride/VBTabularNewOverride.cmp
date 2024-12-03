@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <c:vBTabularNewCollector aura:id="newCollector" calledFromAura="true" onclosemodal="{!c.handleModalClose}"/>
+</aura:component>

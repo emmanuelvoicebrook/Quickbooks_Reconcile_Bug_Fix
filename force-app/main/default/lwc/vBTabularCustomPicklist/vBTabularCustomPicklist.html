@@ -1,0 +1,27 @@
+<template>
+    <div class="c-picklist-content">
+        <lightning-input label="Label"
+                         value={data.label}
+                         data-name="label"
+                         onchange={handleChange}
+                         style="margin-right: .5em"
+                         required>
+        </lightning-input>
+        <lightning-input label="Value"
+                            value={data.value}            
+                            data-name="value"                                
+                            onfocusout={handleChange}
+                            required>
+        </lightning-input>
+        <div class="remove">
+            <lightning-icon onclick={handlePicklistOptionRemove} 
+                            icon-name="action:delete" 
+                            size="x-small" 
+                            alternative-text="delete" 
+                            title="delete" 
+                            class="remove-field">
+            </lightning-icon>      
+        </div>                                            
+
+    </div>
+</template>

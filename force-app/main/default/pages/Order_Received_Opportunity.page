@@ -1,0 +1,7 @@
+<apex:page standardController="Opportunity">
+    <flow:interview name="Order_Received" finishLocation="/{!Opportunity.id}">
+       <apex:param name="OpportunityID" value="{!Opportunity.Id}"/>
+       <apex:param name="AccountID" value="{!Opportunity.AccountId}"/>
+       <apex:param name="CurrentUserID" value="{!$User.Id}"/> 
+    </flow:interview>
+</apex:page>

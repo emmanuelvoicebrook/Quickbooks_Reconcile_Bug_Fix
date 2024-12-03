@@ -1,0 +1,118 @@
+<aura:component access="global" implements="lightning:availableForFlowScreens">
+    <aura:attribute name="AppointmentType" type="String"/>
+    <aura:attribute name="Account" type="String"/>
+    <aura:attribute name="CaseNumber" type="String"/>
+    <aura:attribute name="Comment" type="String"/>
+    <aura:attribute name="FirstName" type="String"/>
+    <aura:attribute name="LastName" type="String"/>
+    <aura:attribute name="Email" type="String"/>
+    <aura:attribute name="Phone" type="String"/>
+    <aura:attribute name="SchedStartTime" type="DateTime"/>
+    <aura:attribute name="SchedEndTime" type="DateTime"/>
+    <aura:attribute name="TimeZone" type="String"/>
+    <aura:attribute name="startTimeInMillis" type="Long"/>
+	<aura:attribute name="endTimeInMillis" type="Long"/>
+    <!-- When the component renders, call the init handler. -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <!-- Attribute to store the validation logic in. -->
+    <aura:attribute name="validate" type="Aura.Action" description="Validation Logic"/>
+
+
+    <div class="slds-section slds-is-open">
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">General Information</span>
+      </h3>
+      <div class="slds-section__content">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input type="text" id="appointment-type" label="Appointment Type" value="{!v.AppointmentType}" disabled="true"/>
+              </div>
+            </div>
+          </div>
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input type="text" id="account" label="Account" value="{!v.Account}" disabled="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input type="text" id="case-number" label="Case Number" value="{!v.CaseNumber}" disabled="true" />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input type="text" id="comment" label="Comment" value="{!v.comment}" name="comment"  onchange="{!c.handleInputChange}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="slds-section slds-is-open">
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Scheduled Times (America/New_York)</span>
+      </h3>
+      <div class="slds-section__content">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col">
+              <lightning:input type="datetime" name="SchedStartTime" label="Start Time" disabled="true" value="{!v.SchedStartTime}" />
+          </div>
+          <div class="slds-col">
+              <lightning:input type="datetime" name="SchedEndTime " label="End Time" disabled="true" value="{!v.SchedEndTime }" />
+          </div>
+        </div>
+       </div>
+    </div>
+    
+    
+    <div class="slds-section slds-is-open">
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Contact Information</span>
+      </h3>
+      <div class="slds-section__content">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input type="text" id="first-name" label="First Name" value="{!v.FirstName}" name="FirstName" />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input required="true" type="text" label="Last Name" id="last-name" value="{!v.LastName}" name="LastName" onchange="{!c.handleInputChange}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input required="true" type="tel" label="Phone" id="phone" value="{!v.Phone}" name="Phone" onchange="{!c.handleInputChange}" />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning:input required="true" type="text" label="Email" id="email" value="{!v.Email}" name="Email" onchange="{!c.handleInputChange}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</aura:component>

@@ -1,0 +1,69 @@
+<template>
+    <template if:true={noFields}>
+        <div class="error">
+            <h1>No fields to display</h1>
+        </div>
+    </template>
+    <template if:false={noFields}>
+
+        <div class="fields" style={getHeight}>
+            <template for:each={_info.fieldData} for:item="field">
+                <div class="content" key={field.Id}>
+                    <template if:true={field.isSFPicklist__c}>
+                        <div class="picklist field" key={field.id} >                        
+                            <!-- <lightning-combobox label={field.label} data-name={field.id} value={field.value} onchange={updateData} options={_picklistValues} variant={getVariantDetails} required={field.required}></lightning-combobox> -->
+                            <c-v-b-tabular-salesforce-picklist label={field.Field_Label__c} 
+                                                            data-name={field.id} 
+                                                            value={field.value} 
+                                                            onsfpicklistchange={updateData} 
+                                                            variant={getVariantDetails} 
+                                                            required={field.Field_Required__c}
+                                                            sobject={field.SF_Picklist_Data__c.objectName}
+                                                            fieldsource={field.SF_Picklist_Data__c.fieldName}>
+                            </c-v-b-tabular-salesforce-picklist>
+                        </div>                    
+                    </template>
+                    <template if:true={field.isCustomPicklist__c}>
+                        <div class="picklist field" key={field.id} >                        
+                            <lightning-combobox label={field.Field_Label__c} data-name={field.id} value={field.value} onchange={updateData} options={field.Custom_Picklist_Data__c} variant={getVariantDetails} required={field.Field_Required__c}></lightning-combobox>
+                        </div>                    
+                    </template>
+                    <template if:true={field.isInput__c}>
+                        <div class="input field" key={field.id}>
+                            <lightning-input type={field.Field_Type__c} label={field.Field_Label__c} data-name={field.id} value={field.value} onchange={updateData} variant={getVariantDetails} required={field.Field_Required__c}></lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={field.isLookup__c}>
+                        <div class="lookup field" key={field.id}>
+                            <c-v-b-tabular-salesforce-lookup label={field.Field_Label__c} 
+                                                            data-name={field.id} 
+                                                            value={field.value} 
+                                                            onchange={updateData} 
+                                                            variant={getVariantDetails} 
+                                                            required={field.Field_Required__c}
+                                                            sobject={field.Lookup_Data__c.objectName}
+                                                            fieldsource={field.Lookup_Data__c.fieldName}>
+                            </c-v-b-tabular-salesforce-lookup>
+                            <!-- <lightning-combobox label={field.label} data-name={field.id} onchange={updateData} value={field.value} variant={getVariantDetails} required={field.required}></lightning-combobox> -->
+                        </div>
+                    </template>
+                    <template if:true={field.isTypeCheckboxGroup}>
+                        <div class="checkboxgroup field" key={field.id}>
+                            <lightning-combobox label={field.Field_Label__c} data-name={field.id} onchange={updateData} value={field.value} variant={getVariantDetails} required={field.Field_Required__c}></lightning-combobox>
+                        </div>
+                    </template>
+                    <template if:true={field.isTypeRadioGroup}>
+                        <div class="radiogroup field" key={field.id}>
+                            <lightning-combobox label={field.Field_Label__c} data-name={field.id} onchange={updateData} value={field.value} variant={getVariantDetails} required={field.Field_Required__c}></lightning-combobox>
+                        </div>
+                    </template>
+                    
+                </div>
+                
+            </template>
+            <div class="delete-icon" style={getStyle}>
+                <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete" size="x-small" onclick={deleteEntry} ></lightning-icon>
+            </div>
+        </div>
+    </template>
+</template>

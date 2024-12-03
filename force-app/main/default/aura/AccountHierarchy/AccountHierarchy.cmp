@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="AccountHierarchyController">
+
+    <!-- Atributes-->
+	<aura:attribute name="accountId" type="string" />
+    <aura:attribute name="hasParent" type="boolean" default="false"/>
+    <aura:attribute name="numChildren" type="integer" default="0" />
+    <aura:attribute name="childOrChildren" type="string" default="children" />
+    <aura:attribute name="headerTitle" type="Aura.Component[]">
+        <h2>
+            <b>This site is part of a hierarchy.</b>
+        </h2>
+    </aura:attribute>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+
+    <aura:if isTrue="{!or(v.hasParent, v.numChildren > 0)}">
+    <lightning:card title="{!v.headerTitle}" iconName="standard:hierarchy" class="slds-card_boundary">
+        <div class="slds-card__body_inner" style="padding: 0 1.5em;">
+            The related account has
+            <aura:if isTrue="{!and(v.hasParent, v.numChildren > 0)}">
+                a parent and {!v.numChildren}&nbsp;{!v.childOrChildren}.
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.hasParent}">a parent. </aura:if>
+                    <aura:if isTrue="{!v.numChildren > 0}">{!v.numChildren}&nbsp;{!v.childOrChildren}. </aura:if>
+                </aura:set>
+            </aura:if>
+            <a onclick="{!c.navigateToAccountHierarchy}">View the Account Hierarchy</a>.
+        </div>
+    </lightning:card>
+    </aura:if>
+</aura:component>

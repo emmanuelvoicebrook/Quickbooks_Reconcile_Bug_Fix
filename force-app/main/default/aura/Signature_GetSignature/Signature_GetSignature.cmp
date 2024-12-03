@@ -1,0 +1,19 @@
+<aura:component controller="VB_SignatureController">
+
+    <aura:attribute name="SelectedUserId" type="String" />
+    <aura:attribute name="error" type="String" />
+    <aura:attribute name="vfPageUrl" type="String" />
+    <aura:attribute name="ready" type="Boolean" default="false" />
+    <aura:attribute name="showPrevious" type="Boolean" default="true" />
+    <aura:attribute name="showNext" type="Boolean" default="false" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="loaded" type="c:Signature_Ready" />
+
+    <div style="height: 100%; width: 100%; position: relative;">
+        <div style="position: relative; height: 100%; width: 100%; overflow: hidden;">
+            <iframe src="{!v.vfPageUrl}" frameborder="0" style="height:100%; width:100%;" scrolling="auto"></iframe>
+
+        </div>
+    </div>
+</aura:component>

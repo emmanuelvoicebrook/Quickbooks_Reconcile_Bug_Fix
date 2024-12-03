@@ -1,0 +1,6 @@
+<apex:page standardController="Case">
+    <h1>Case Creation</h1>
+    <p>select the contact and click on the "Create Ticket" button </p>
+    <flow:interview name="Case_Management_Create_Case"/>
+
+</apex:page>

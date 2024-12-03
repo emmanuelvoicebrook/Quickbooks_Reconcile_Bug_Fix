@@ -1,0 +1,4 @@
+
+.slds-accordion__summary-content{
+    color: rgb(1, 58, 129) !important;
+}

@@ -1,0 +1,6 @@
+<apex:page standardController="Contact">
+    <apex:relatedList list="Opportunities"/>
+    <apex:relatedList list="Project_Contacts__r"/>
+    <apex:relatedList list="Key_Implementation_Contacts__r"/>
+    <apex:relatedList list="Implementation_Contacts__r"/>
+</apex:page>

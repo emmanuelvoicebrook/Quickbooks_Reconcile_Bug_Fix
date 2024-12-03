@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>VB Tabular Collector</masterLabel>
+
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+
+    
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="isPreview" type="Boolean" label="Preview?" description="Is this form for preview purposes?" />
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__FlowScreen">
+            <property name="formName" type="String" label="Form Name" required="false" description="Name of the form to be displayed, Should be an exact match as appears in the tabular form" />
+            <property name="defaultValues" type="String" label="Parsed Values" description="Default Values" />
+        </targetConfig>
+        
+    </targetConfigs>
+
+
+    
+</LightningComponentBundle>

@@ -1,0 +1,12 @@
+h3{
+    color: rgb(1, 58, 129);
+}
+
+.info{
+    padding-left: 2rem;
+}
+
+.slds-accordion__summary-content{
+    font-size: 14px !important;
+    color: rgb(1, 58, 129) !important;
+}

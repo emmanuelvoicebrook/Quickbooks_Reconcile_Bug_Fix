@@ -1,0 +1,10 @@
+.delete{
+    transition: transform .2s;
+    cursor: pointer;
+}
+
+.delete:hover{
+    transform: scale(1.25); /* IE 9 */
+    -webkit-transform: scale(1.25); /* Safari 3-8 */
+    transform: scale(1.25);
+}

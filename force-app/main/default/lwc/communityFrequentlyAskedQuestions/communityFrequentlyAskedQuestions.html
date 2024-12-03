@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <!-- <template for:each={articles} for:item="article">
+            <div key={article.Id}>
+                <c-vb-accordion open={open} key-text={article.Title} hidden-text={article.Article__c}></c-vb-accordion>
+            </div>
+        </template> -->
+
+
+        <lightning-accordion allow-multiple-sections-open>
+            <template for:each={articles} for:item="article">
+                <div key={article.Id}>
+                    <lightning-accordion-section name={article.Title} label={article.Title}>
+                        <lightning-formatted-rich-text value={article.Article__c}></lightning-formatted-rich-text>
+                    </lightning-accordion-section>
+                </div>
+            </template>
+        </lightning-accordion>
+    </div>
+</template>

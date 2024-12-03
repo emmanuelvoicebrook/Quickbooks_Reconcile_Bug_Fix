@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>VB Accordion</masterLabel>
+
+    
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="open" label="Open by Default" type="Boolean" role="inputOnly" description="Should the accordion be open by default"></property>
+            <property name="keyText" label="Top Text" type="String" role="inputOnly" description="The label to appear for the numeric field" ></property>
+            <property name="hiddenText" label="Hidden Info" type="String" role="inputOnly" description="Hidden Info (rich text)" ></property>            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,53 @@
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 3em;
+    margin-right: 10px;
+    border: blue 1px solid
+}
+
+.user-name {
+    font-size: 16px;
+    color: #333;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 0.3rem;
+    width: 280px;
+    padding: .5rem;
+    margin-top: .2rem;
+
+}
+.company-name{
+    display: block;
+}
+
+hr{
+    margin: .1rem;
+}
+
+.dropdown-menu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}

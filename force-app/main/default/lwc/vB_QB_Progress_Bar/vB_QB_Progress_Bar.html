@@ -1,0 +1,56 @@
+<template>
+    <div>
+        <div class="main">
+            <template if:true={showSpinner}>
+                <div class="spinnerHolder">
+                    <lightning-spinner alternative-text="Loading" size="small" variant="brand">
+                    </lightning-spinner>
+                </div>
+            </template>
+            <template if:true={successfull}>
+                <div class="check">
+                    <div class="inner-check">
+                        <lightning-icon icon-name="action:approval" alternative-text="Success" size="xx-small" variant="brand"></lightning-icon>
+                    </div>
+                </div>
+            </template>
+            <div class={progressHolderClass}>
+                <div>
+                    <p>
+                        <span class="status-label" style="font-weight:bold">Status: </span> {status}
+                        <br/>
+                    </p>
+                </div>
+                <lightning-progress-bar value={val} size={size} variant={variant}>
+                </lightning-progress-bar>
+                <template if:true={progressText}>
+                    <lightning-formatted-text value={progressText}></lightning-formatted-text>
+                </template>
+            </div>
+        </div>
+        <template if:true={showError}>
+            <div class="failed">
+                <br/>
+                <h3 style="font-weight:600;text-decoration:underline">Failed Records: </h3>
+                <p class="message">
+                    Please contact your administrator to resolve the following Billable Milestones that failed to reconcile:
+                </p> 
+                <lightning-datatable
+                        hide-checkbox-column
+                        key-field="Id"
+                        data={failed_bms}
+                        columns={columns}>
+                </lightning-datatable>
+            </div>
+        </template>
+        <template if:true={done}>
+            <div class="done">
+                <template if:true={showError}>
+                    <lightning-button class="download btn" label="Download Error Report" variant="brand" onclick={downloadErrorReport}></lightning-button>
+                </template>
+                <lightning-button class="finish btn" label="Finish" variant="success" onclick={handleFinsih}>
+                </lightning-button>
+            </div>
+        </template>
+    </div>
+</template>

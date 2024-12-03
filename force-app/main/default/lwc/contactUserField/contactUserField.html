@@ -1,0 +1,36 @@
+<template>
+    <div class="">
+        <template if:true={error}>
+            <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+                <lightning-icon icon-name="utility:warning" size="small"></lightning-icon>
+                <h6>Please review the error(s) below</h6>
+                <ul>
+                    <template for:each={errorMessages} for:item="error">
+                        <li key={error}>{error}</li>
+                    </template>
+                </ul>
+            </div>
+        </template>
+        <c-v-b-lookup-field id="account" combobox-list={possibleAccounts} selected-value={selectedAccountName}
+            contact-selected={account_selected} onselection={handleAccountSelection} label="Account" icon="account"
+            onsearch={handleAccountSearch} onclear={clearAccountSelection} show-subtext="false" required={required}>
+        </c-v-b-lookup-field>
+
+        <c-v-b-lookup-field id="contact" combobox-list={possibleContacts} selected-value={selectedContactName}
+            contact-selected={contact_selected} onselection={handleContactSelection} label="Contact" icon="contact"
+            disabled={contactDisabled} onsearch={handleContactSearch} onclear={clearContactSelection}
+            show-subtext="true" required={required}>
+        </c-v-b-lookup-field>
+
+        <div class="slds-col" style="padding-left: 5px;">
+            <lightning-input id="control-checkbox" data-name="controller" name="control" type="checkbox"
+                label="User is the Same as Contact" onchange={handleChange}></lightning-input>
+        </div>
+
+        <c-v-b-lookup-field id="user" combobox-list={possibleUsers} selected-value={selectedUserName}
+            disabled={userDisabled} contact-selected={user_selected} onselection={handleUserSelection} label="User"
+            show-subtext="true" onsearch={handleUserSearch} onclear={clearUserSelection} icon="contact"
+            required={required}>
+        </c-v-b-lookup-field>
+    </div>
+</template>

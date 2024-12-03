@@ -1,0 +1,21 @@
+.THIS html { 
+    overflow: hidden; 
+} 
+
+.THIS html, 
+.THIS body, 
+.THIS div, 
+.THIS iframe { 
+    margin: 0px; 
+    padding: 0px; 
+    height: 100%; 
+    border: none; 
+} 
+
+.THIS iframe { 
+    display: block; 
+    width: 100%; 
+    border: none; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}

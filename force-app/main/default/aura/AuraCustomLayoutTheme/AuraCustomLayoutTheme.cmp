@@ -1,0 +1,23 @@
+<aura:component implements="forceCommunity:themeLayout">
+    <aura:attribute name="navBar" type="Aura.Component[]" required="false" />
+    <aura:attribute name="newHeader" type="Aura.Component[]" required="false" />
+    <aura:attribute name="footer" type="Aura.Component[]" required="false" />
+    <div class="theme-container" style="display: flex;
+                                        flex-direction: column;
+                                        min-height:100vh;">
+        <div class="slds-col sticky-header">
+            {!v.newHeader}
+        </div>
+      
+        <div class="slds-col main-body">
+            <div class="body-container" >
+                {!v.body}
+            </div>
+        </div>
+        <div class="slds-col footer">
+            {!v.footer}
+        </div>
+
+    </div>
+
+</aura:component>

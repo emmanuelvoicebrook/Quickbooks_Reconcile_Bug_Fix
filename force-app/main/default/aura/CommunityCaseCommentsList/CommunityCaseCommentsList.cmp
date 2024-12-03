@@ -1,0 +1,50 @@
+<aura:component description="RelatedList" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" controller="CommunityCaseCommentsRelatedList">
+    <aura:attribute name="objectType" type="String"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="parentFieldName" type="String"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="tableSize" type="integer"/>
+    <aura:attribute name="data" type="sObject[]" access="global"/>
+    <aura:attribute name="page" type="integer"/>
+    <aura:attribute name="pages" type="integer"/>
+    <aura:attribute name="total" type="integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="force:showToast" action="{!c.handleApplicationEvent}"/>
+    <lightning:overlayLibrary aura:id="overlayLib" />
+
+    <aura:handler event="c:CaseCommentCreatedEvent" action="{!c.handleChild}" />
+
+    <div class="custom-card" style="border: 1px solid #d8dde6 !important;
+                                    border-radius: 0.25rem !important;
+                                    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16) !important;
+                                ">
+        <lightning:card title="Case Comments" iconName="standard:case_comment">
+            <aura:set attribute="actions">
+                <lightning:button label="New" onclick="{!c.createRecord}"/>
+            </aura:set>
+            <div>
+                <aura:if isTrue="{!not(empty(v.data))}" >
+                    <lightning:datatable data="{! v.data }"
+                                         columns="{! v.columns }"
+                                         keyField="id"
+                                         hideCheckboxColumn="true"
+                                         resizeColumnDisabled="true"
+                                         onrowaction="{! c.handleRowAction }"/>
+                    <div class="button-container">
+                        <lightning:button disabled="{!v.page == 1}" variant="base" label="Previous" onclick="{! c.navigate }" />
+                        &nbsp;{!v.page} / {!v.pages}&nbsp;
+                        <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="base" label="Next" onclick="{! c.navigate }" />
+                    </div>
+                </aura:if>
+    
+                <aura:if isTrue="{!empty(v.data)}" >
+                    <div class="slds-p-around_small">
+						No comments have been added to this case. Click the 'New' button to add a comment.
+                    </div>
+                </aura:if>
+            </div>
+        </lightning:card>
+        
+    </div>
+ 
+</aura:component>

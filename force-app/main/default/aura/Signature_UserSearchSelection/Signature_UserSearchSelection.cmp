@@ -1,0 +1,59 @@
+<!-- Screen2_UserSearchSelection.cmp -->
+<aura:component controller="VB_SignatureController">
+    <aura:attribute name="selectedUser" type="String" />
+    <aura:attribute name="email" type="String" />
+    <aura:attribute name="queryCondition" type="String" />
+    <aura:attribute name="selectedImplementation" type="String" />
+    <aura:attribute name="error" type="String" />
+
+    <!-- init handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:registerEvent name="next" type="c:Signature_NextEvent" />
+
+    <aura:handler name="onchange" event="l_lookup:OnChange" action="{!c.handleChange}" />
+
+    <div class="main">
+        <div class="fields">
+            <aura:if isTrue="{!not(empty(v.error))}">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning"
+                    style="border-radius: 0.25rem; margin-top: 0.25rem" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{!v.error}</h2>
+                </div>
+            </aura:if>
+            <div class="user_selection">
+                <br /><i>Select the user that you would like to sign the verification(an implementation user record is
+                    required for this):</i> <br />
+                <!-- Custom lookup for User Search -->
+                <l_lookup:Lookup objectType="Implementation_User__c" selectedRecordId="{!v.selectedUser}"
+                    primarySearchField="Full_Name__c" additionalField="Primary_Site__c"
+                    queryCondition="{!v.queryCondition}" />
+
+            </div>
+            <br />
+
+            <aura:if isTrue="{!empty(v.selectedUser) }">
+                <strong>You need to select a user to continue.</strong>
+                <aura:set attribute="else">
+                    <div class="slds-form-element">
+                        <!-- email field -->
+                        <lightning:input type="email" label="Please confirm user's email" name="email" value="{!v.email}" />
+                    </div>
+                </aura:set>
+            </aura:if>
+
+            <div>
+            </div>
+            <div class="footer">
+                <hr />
+                <div class="buttons slds-clearfix">
+                    <div class="slds-float_right">
+                        <lightning:button label="Get Signature" variant="brand" onclick="{!c.goToNext}"
+                            disabled="{!empty(v.email) }" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,21 @@
+.milestone-timer-text-overdue{
+    color: rgb(234, 0, 30);
+    font-style: italic !important;
+    font-size: 0.75rem !important;
+}
+
+.milestone-timer-text{
+    
+    font-style: italic !important;
+    font-size: 0.75rem !important;
+}
+
+.milestones-item{
+    font-size: 0.8125rem;
+    color: rgb(24, 24, 24);
+    padding-bottom: 0.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

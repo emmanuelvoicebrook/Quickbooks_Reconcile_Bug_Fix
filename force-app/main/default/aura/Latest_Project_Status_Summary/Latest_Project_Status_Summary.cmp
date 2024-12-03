@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <lightning:card iconName="action:update_status" title="Latest Project Status Summary">
+        <div class="slds-p-left_large slds-p-right_medium"> 
+            <lightning:recordForm  recordId="{!v.recordId}" objectApiName="Projects__c" fields="Latest_Project_Status_Summary__c"/>
+        </div>
+    </lightning:card>
+</aura:component>

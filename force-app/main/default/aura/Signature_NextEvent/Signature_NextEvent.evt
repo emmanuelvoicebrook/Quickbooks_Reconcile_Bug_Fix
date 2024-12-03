@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="NextScreen" type="String" />
+    <aura:attribute name="SelectedAccount" type="String" />
+    <aura:attribute name="SelectedImplementation" type="String" />
+    <aura:attribute name="SelectedUserId" type="String" />
+</aura:event>

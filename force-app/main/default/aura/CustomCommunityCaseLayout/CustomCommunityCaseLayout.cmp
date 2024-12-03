@@ -1,0 +1,94 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" controller="CommunityCaseController" access="global">
+
+    <!-- Attributes -->
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isTrainingExecutionCase" type="Boolean" default="false" />
+    <aura:attribute name="isCaseClosed" type="Boolean" default="false"/>
+
+    <!-- Aura handler to call doInit on initialization -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Case Details Section (shown if NOT a Training Execution case) -->
+    <aura:if isTrue="{!not(v.isTrainingExecutionCase)}">
+        <div class="case-detail">
+            <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Case">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="CaseNumber" />  
+                    </div>  
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="Description" />  
+                    </div>  
+                </div>
+                <hr/>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="Severity__c" />
+                        <hr/>
+                        <lightning:outputField fieldName="Status" />
+                        <hr/>
+                        <lightning:outputField fieldName="CreatedDate" />
+                        <hr/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="ContactId" class="no-click" />
+                        <hr/>
+                        <lightning:outputField fieldName="User__c" class="no-click" />
+                        <hr/>
+                        <aura:if isTrue="{!v.isCaseClosed}">
+                        	<lightning:outputField fieldName="ClosedDate" />
+                        	<hr/>
+                        </aura:if>
+                    </div>
+                </div>
+            </lightning:recordViewForm>
+        </div>
+    </aura:if>
+
+    <!-- New Case Detail Section for Training Execution Cases (shown if it IS a Training Execution case) -->
+    <aura:if isTrue="{!v.isTrainingExecutionCase}">
+        <div class="training-execution-detail">
+           <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Case">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="CaseNumber" />  
+                    </div>  
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="Description" />  
+                    </div>  
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="Training_Conference_Room__c" />  
+                    </div>  
+                </div>
+                <hr/>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="Scheduled_Date_Time_Local__c" />
+                        <hr/>
+                        <lightning:outputField fieldName="Status" />
+                        <hr/>
+                        <lightning:outputField fieldName="CreatedDate" />
+                        <hr/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:outputField fieldName="ContactId" class="no-click" />
+                        <hr/>
+                        <lightning:outputField fieldName="User__c" class="no-click" />
+                        <hr/>
+                        <aura:if isTrue="{!v.isCaseClosed}">
+                        	<lightning:outputField fieldName="ClosedDate" />
+                        	<hr/>
+                        </aura:if>
+                    </div>
+                </div>
+            </lightning:recordViewForm>
+        </div>
+    </aura:if>
+
+</aura:component>

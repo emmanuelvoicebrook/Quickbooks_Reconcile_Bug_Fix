@@ -1,0 +1,114 @@
+<template>
+    <div class="cont">          
+        <div class="filter-menu" >   
+            <template if:false={activeStatus}>     
+                <div class="top" onclick={toggleFilter}>
+                    Filters and Sort                    
+                </div>
+            </template>     
+            <template if:true={activeStatus}>     
+                <div class="top shadow" onclick={toggleFilter} >
+                    Filters and Sort Active
+                    
+                </div>                    
+                
+            </template> 
+            <template if:true={showPopup}>
+                <div class="popup" id="my-popup-box">
+                    <div class="relative">
+                        <div class="popup-content slds-scrollable_y">
+                            <div class="error">
+                                <template if:true={validateSortCriteria}>
+                                    Ensure that the sort criteria options are different
+                                </template>
+                            </div>
+
+                            <span class="title">
+                                Sort criteria:
+                            </span>
+                            <div class="sort">
+                                <div class="sort-criteria">
+                                    <lightning-combobox class="sort-item" placeholder="" label="Sort Field 1" options={sortOptions} onfocus={closeRecordTypes} onchange={handleSortChange1} value={sortBy1}>
+        
+                                    </lightning-combobox >  
+                                    <lightning-combobox class="sort-item" placeholder="" options={sortorderoptions} onfocus={closeRecordTypes} label="Sort Order" value={sortOrder1} onchange={handlesortorder1}>
+
+                                    </lightning-combobox>  
+                                </div>
+                                <div class="sort-criteria">
+                                    <lightning-combobox class="sort-item" placeholder="" label="Sort Field 2" options={sortOptions} onfocus={closeRecordTypes} onchange={handleSortChange2} value={sortBy2}>
+        
+                                    </lightning-combobox >
+                                    <lightning-combobox class="sort-item" placeholder="" options={sortorderoptions} onfocus={closeRecordTypes} label="Sort Order" value={sortOrder2} onchange={handlesortorder2}>
+
+                                    </lightning-combobox>  
+
+                                </div>    
+                                <!-- <lightning-radio-group label="Sort Order" options={sortorderoptions} onchange={handleSortOrderChange} value={sortOrder}>
+        
+                                </lightning-radio-group > -->
+                            </div>
+                            <br/>
+                            <br/>
+
+                            <span class="title">
+                                Filter By:
+                            </span>
+
+                            <div class="filter-fields">
+                                <lightning-combobox placeholder="" label="Requested By:" options={requestedbyusers} onfocus={closeRecordTypes} data-name="requestedBy" onchange={handleFilterChanges} value={_filters.requestedBy}>
+        
+                                </lightning-combobox >
+                                <lightning-combobox placeholder="" label="Requested For:" options={requestedforusers} onfocus={closeRecordTypes} data-name="requestedFor" onchange={handleFilterChanges} value={_filters.requestedFor}>
+        
+                                </lightning-combobox >
+                                <lightning-combobox placeholder="" label="Assigned To: " options={assignedtousers} onfocus={closeRecordTypes} data-name="AssignedTo" onchange={handleFilterChanges} value={_filters.AssignedTo}>
+                                </lightning-combobox>
+                                <!-- <lightning-combobox label="Record Type" options={getrecordtypes}  onchange={handleRecTypeChange} value={recordTypeVal}>
+        
+                                </lightning-combobox> -->
+        
+                                <!-- <c-multi-select-picklist options={getrecordtypes} label="Record Types" onchange={handleRecTypeChange} selectedvalues={_filters.recTypes}></c-multi-select-picklist> -->
+                                <c-v-b-multi-select-picklist options={getrecordtypes} label="Record Types" onchange={handleRecTypeChange} value={getRecordTypes}></c-v-b-multi-select-picklist>
+        
+                                <lightning-combobox placeholder="" label="Asset Type: "  onchange={handleFilterChanges} onfocus={closeRecordTypes} data-name="assetType" options={getAssetOptions} value={_filters.asset}>
+        
+                                </lightning-combobox>
+                                <lightning-combobox placeholder="" label="Priority"  onchange={handleFilterChanges} onfocus={closeRecordTypes} data-name="priority" options={getPriorityOptions} value={_filters.priority}>
+        
+                                </lightning-combobox>
+                            </div>
+                            <br/>
+                            <div class="date-filter ">
+                                <div class="created-date dates">
+                                    <lightning-combobox placeholder="" style="width: 35%" label="Created Date:" options={dateOptions} onfocus={closeRecordTypes} onchange={handleCreatedFilter} value={createdFilter}>
+                                    </lightning-combobox>
+                                    <lightning-input class="date-content" type="date" name="date-input" label="Date" onfocus={closeRecordTypes} value={createdDate} onchange={handleCreatedDate}>                                    
+                                    </lightning-input>                                
+                                </div>
+                                <br/>
+                                <div class="due-date dates">
+                                    <lightning-combobox placeholder="" style="width: 35%" label="Close Date:" options={dateOptions} onfocus={closeRecordTypes} onchange={handleClosedFilter} value={closedFilter} >
+                                    </lightning-combobox>
+                                    <lightning-input class="date-content" type="date" name="date-input1" label="Date" onfocus={closeRecordTypes} value={closedDate} onchange={handleClosedDate}>                                     
+                                    </lightning-input>
+                                </div>
+                                <br/>
+                                <lightning-input type="checkbox" label="Overdue Cases" onclick={handleOverdue} class="overdue"></lightning-input>
+                            </div>
+                            <br/>
+                            <br/>
+                        </div>     
+        
+                        <div class="footer">
+                            <button class="slds-button slds-button_text-destructive" onclick={toggleFilter}>Cancel</button>
+                            <button class="slds-button slds-button_neutral" onclick={handleReset}>Reset</button>
+                            <button class="slds-button slds-button_brand" onclick={handleApply}>Apply</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </template>
+        </div>
+    </div>    
+</template>

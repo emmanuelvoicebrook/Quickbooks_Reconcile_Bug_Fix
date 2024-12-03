@@ -1,0 +1,6 @@
+<apex:page standardController="Case">
+    <flow:interview name="Training_Owed_Order_Received" finishLocation="closeWin">
+           <apex:param name="CaseID" value="{!Case.Id}"/>
+           <apex:param name="UserID" value="{!$User.Id}"/>
+    </flow:interview>
+</apex:page>

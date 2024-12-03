@@ -1,0 +1,66 @@
+<template>
+    <h3><lightning-icon src={penSquareIcon}></lightning-icon> Preparing to Contact Support</h3>
+    <br>
+    <div class="info">
+
+        <p>To help us assist you as efficiently as possible, please prepare the following information before reaching
+            out to
+            our Client Support team:</p>
+
+
+        <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}
+            active-section-name={activeSections}>
+            <lightning-accordion-section name="A" label="Description of Issue">
+                <ul>
+                    <li>
+                        Clearly describe the problem you are facing. Be as concise as possible, including any specific
+                        details
+                        about what you were trying to do when the issue occurred.
+                        This allows us to understand your situation better and provide a more accurate solution.
+                    </li>
+                </ul>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="B" label="Issue Impact">
+                <ul>
+                    <li>
+                        How many users are impacted by this issue and how it impacts your daily tasks.
+                        This allows us to understand the severity of your issues and provide the appropriate level of
+                        attention
+                        to it.
+                    </li>
+                </ul>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="C" label="Error Message">
+                <ul>
+                    <li>
+                        If you received any error messages or codes, please note them down. These details are crucial
+                        for
+                        diagnosing the problem more effectively.
+                        If contacting us via email or online, a screenshot of the issue is helpful.
+                    </li>
+                </ul>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="D" label="Existing Issue?">
+                <ul>
+                    <li>
+                        If this isn’t your first time contacting us about the issue, please provide your case number.
+                        This information will help us track the history of your issue and review any past actions taken.
+                    </li>
+                </ul>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="E" label="Steps to Reproduce">
+                <ul>
+                    <li>
+                        Describe the steps you took leading up to the problem. Knowing what triggers the issue can be
+                        key in
+                        resolving it swiftly.
+                    </li>
+                </ul>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </div>
+</template>

@@ -1,0 +1,175 @@
+<template>
+        
+    <div class="container" style={getBackground}>
+
+        <!--Title, Filters and settings-->
+        <div class="board-top">
+
+            <div class="left">
+                <div class="right-record-types" style={getTitleColor}>
+                    <template for:each={recordTypeSettings} for:item="setting">
+                        <div key={setting.RecordType} class="key-content">
+                            <div class="key" style={setting.style}> </div>
+                            <span class="">
+                                &nbsp;{setting.RecordType} <br/>   
+                            </span>                 
+                        </div>
+                    </template>
+                </div>
+                
+            </div>
+            <div class="header">
+                <h1 class="title slds-truncate" style={getTitleColor}> 
+                    {header}
+                </h1>
+            </div>
+            
+            
+            <div class="view">
+                <div class="search" onkeyup={handleKeyUp}>
+                    <lightning-input
+                        name="enter-search"
+                        type="search"
+                        onchange={handleRecordSearch}
+                    ></lightning-input>
+                </div>
+                <c-workboard-filters class="filter-item" requestedforusers={requestedForUsers} departments={divisionOptions}
+                                    recordtypes={recordTypes} onnewfilters={handleFilterChange} priorities={priority}
+                                    assettypes={assets} requestedbyusers={requestedByUsers} assignedtousers={assignedToUsers} filters={getFilters}>
+                </c-workboard-filters>
+            </div>
+            
+        </div>
+
+
+        <!-- Kanban Columns-->
+        <template if:true={isLoading}>
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">                            
+                    </lightning-spinner>
+            </div>
+        </template>
+        <div class="slds-grid content">  
+            <template if:true={checkWorkboardRecords}>
+                <template for:each={columns} for:item="column" class="column">
+                    <c-workboard-lane records={workboardRecords} class="dropZone" 
+                                        status={column.label} key={column} onlaneloaded={handleLoaded} 
+                                        style={calcWidth} onlistitemdrag={handleListItem}
+                                        onparent={handleParent} onitemdrop={handleItemDrop}
+                                        colorsettings={currentTheme} sobject={sObject} column_length={column_length}>
+                    </c-workboard-lane>
+                                        
+                </template>
+            </template>  
+            <template if:false={checkWorkboardRecords}>
+                <h2 onload={handleLoaded} style={getTitleColor}>
+                    No Records Found
+                </h2>
+            </template>
+            <div class="bottom-right">
+                <!--Settings Icon-->
+                <div class="Settings">
+                    <lightning-icon icon-name="utility:settings" alternative-text="Settings" variant="error" title="Settings" onclick={openSettings}></lightning-icon>
+                </div>
+
+                <div class="newCase" onclick={newCase}>
+                    <img class="addImage" src={addImage}>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Box-->
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div style="position: relative;">
+                        <button class="slds-button close slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" title="Close"></lightning-icon>
+                        </button>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <div class="">
+                                <lightning-tabset>
+                                    <lightning-tab label="Details">
+                                        <div class="slds-scrollable_y details">
+                                            <lightning-record-form record-id={currRecord}
+                                                                    object-api-name={sObject} 
+                                                                    onsuccess={valueUpdate}
+                                                                    oncancel={closeModal}
+                                                                    columns="2"
+                                                                    layout-type="Full"
+                                                                    mode="edit">
+                                            </lightning-record-form> 
+                                        </div>                                        
+                                    </lightning-tab>
+                                    <lightning-tab label="Update Item">
+                                        <c-screen-flow width='100%' height='300rem' test={recordId} flow-name={RecordUpdateFlow} name="Edit Record" flow-params={editFlowParamsJSON}></c-screen-flow>
+                                    </lightning-tab>
+                                </lightning-tabset>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open">
+            </div>
+            
+        </template>
+
+        <!-- Create a new case form modal -->
+        <template if:true={isCreateNewCaseOpen}>
+            <div role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button close slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeNewCaseForm} title="Close">
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" title="Close"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-modal__title slds-hyphenate">Create a New IT Work Request</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" >
+                            <c-screen-flow width='100%' height='700rem' flow-name={RecordCreationFlow} name="Workboard Item Record Creation" ></c-screen-flow>
+                    </div>
+                </div>
+            </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+            
+        
+        
+        <!-- Kanban Setting Configurator -->
+        <template if:true={isSettingOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeSettings} title="Close">
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" title="Close"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">Workboard Settings</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" >                    
+                    <div class="slds-form">
+                        <!--Theme Choice-->
+                        <lightning-radio-group name="themeChoice"
+                                               label="Choose a Theme"
+                                               options={themeOptions}
+                                               value={value}
+                                               type="radio"
+                                               onchange={changeTheme}>
+                        </lightning-radio-group>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>                              
+                      </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+
+</template>

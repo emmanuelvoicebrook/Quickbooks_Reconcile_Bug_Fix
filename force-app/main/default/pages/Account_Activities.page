@@ -1,0 +1,5 @@
+<apex:page standardController="Account">
+    <apex:relatedList list="Opportunities"/>
+    <apex:relatedList list="Projects__r"/>
+    <apex:relatedList list="Implementation__r"/>
+</apex:page>

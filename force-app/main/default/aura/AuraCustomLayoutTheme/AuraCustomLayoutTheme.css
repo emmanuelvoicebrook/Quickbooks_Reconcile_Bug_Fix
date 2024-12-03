@@ -1,0 +1,50 @@
+.THIS .navbar {
+    background-color: rgb(1, 58, 129);
+    color: white;
+}
+
+.THIS .theme-container{
+    display: flex;
+    flex-direction: columnn;
+    align-items: center;
+    min-height:100vh;
+}
+
+.THIS .main-body{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    margin-top: 100px;
+    margin-bottom: 120px !important;
+
+}
+.THIS .body-container{
+    width: 100%;
+    padding: 0.5em 2em;
+}
+.THIS .sticky-header {
+    position: -webkit-fixed; /* For Safari */
+    position: fixed;
+    top: 0;
+    z-index: 1000; /* Ensure it appears above other elements */
+    background-color: white; /* Background color to avoid overlap issues */
+    width: 100%; /* Ensure it spans the full width */
+}
+
+
+@media (min-width: 1024px){
+    .THIS .body-container {
+        width : 66.67%;
+        padding: 0;
+        
+    }
+}
+
+.THIS .footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+}

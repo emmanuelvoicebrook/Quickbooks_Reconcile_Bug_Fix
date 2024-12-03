@@ -1,0 +1,132 @@
+<!-- caseMilestone.html -->
+<template>
+    <template if:true={isComponentVisible}>
+        <div class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:entity_milestone" title="Milestones"
+                            size="small"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <p class="slds-card__header-link slds-truncate">
+                                <span>SLA Milestones</span>
+                            </p>
+                        </h2>
+                    </div>
+                </header>
+                <div class="slds-no-flex">
+                    <!-- Actions (optional) -->
+                </div>
+            </div>
+
+            <template if:true={noMilestones}>
+
+                <div class="slds-card__body slds-card__body--inner">
+                    <p>
+                        No milestones found.
+                    </p>
+                </div>
+            </template>
+            <template if:false={noMilestones}>
+                <div class="body">
+
+                    <!-- Display Active Milestone -->
+                    <template if:true={activeMilestonesExists}>
+                        <div class="slds-card__body slds-card__body--inner">
+                            <template if:true={activeMilestones}>
+                                <template for:each={activeMilestones} for:item="activeMilestone">
+                                    <div key={activeMilestone.Id}>
+                                        <c-milestone-countdown-timer onnavigate={handleNavigate}
+                                            active-milestone={activeMilestone}></c-milestone-countdown-timer>
+
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </template>
+                    <template if:false={activeMilestonesExists}>
+                        <div class="slds-card__body slds-card__body--inner">
+                            <p class="milestones-item">
+                                SLA Compliance : {slaCompliancePercentage}%
+                            </p>
+                        </div>
+                    </template>
+
+                    <!-- Display Completed Milestones -->
+                    <template if:true={isExpanded}>
+                        <div style="background-color:rgb(243, 243, 243);">
+                            <div class="completed-section slds-card__body slds-card__body--inner"
+                                style="padding-top: 0.75em;padding-bottom: 0.75em; margin-bottom:0;">
+                                <p>COMPLETED</p>
+                                <template for:each={milestonesWithSeparator} for:item="milestone">
+                                    <div key={milestone.Id}>
+                                        <div style="padding-top:0.75rem;padding-bottom:0.75rem">
+                                            <div class="slds-grid">
+                                                <div class="slds-col slds-size_6-of-7" style="font-size: 0.75rem;">
+                                                    <!-- <a class="milestones-item" data-id={milestone.Id} 
+                                                    href="" 
+                                                    onclick={navigateRecordHandler}>{milestone.MilestoneType.Name}</a><br> -->
+                                                    <a class="milestones-item" data-id={milestone.Id}
+                                                        href="">{milestone.MilestoneType.Name}</a><br>
+
+                                                    <!-- <p class="milestones-item" >{milestone.MilestoneType.Name}</p> -->
+                                                    <template if:true={milestone.IsViolated}>
+                                                        <p class="milestone-timer-text">Violated</p>
+                                                        ({milestone.StartDate}-{milestone.CompletionDate})
+                                                    </template>
+                                                    <template if:false={milestone.IsViolated}>
+                                                        <p class="milestone-timer-text">Completed</p>
+                                                        ({milestone.StartDate}-{milestone.CompletionDate})
+                                                    </template>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-7">
+                                                    <div class="slds-grid slds-grid_align-end"
+                                                        style="margin-right:.5rem;margin-top:0.5rem;">
+                                                        <template if:true={milestone.IsViolated}>
+                                                            <lightning-icon icon-name="utility:error"
+                                                                size="xx-small"></lightning-icon>
+                                                        </template>
+                                                        <template if:false={milestone.IsViolated}>
+                                                            <lightning-icon icon-name="utility:check"
+                                                                size="xx-small"></lightning-icon>
+                                                        </template>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <template if:false={milestone.isLast}>
+                                            <hr style="margin:0">
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <div class="slds-is-relative slds-align_absolute-center"
+                                style="padding-top:0.5rem;padding-bottom:0.5rem;border-top:1px solid rgb(229, 229, 229)">
+                                <lightning-button label="Show Less" onclick={toggleMilestones}
+                                    variant="base"></lightning-button>
+
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={isExpanded}>
+                        <template if:true={completeMilestonesExists}>
+                            <div class="slds-is-relative slds-align_absolute-center"
+                                style="padding-top:0.5rem;padding-bottom:0.5rem;border-top:1px solid rgb(229, 229, 229)">
+                                <lightning-button label="Show More" onclick={toggleMilestones}
+                                    variant="base"></lightning-button>
+                            </div>
+                        </template>
+                    </template>
+
+                </div>
+            </template>
+
+        </div>
+
+    </template>
+</template>

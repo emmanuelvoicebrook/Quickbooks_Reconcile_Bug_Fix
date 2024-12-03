@@ -1,0 +1,11 @@
+.info ul{
+    list-style-type: none;
+}
+
+.info{
+    padding-left: 2rem;
+}
+
+h3{
+    color: rgb(1, 58, 129);
+}

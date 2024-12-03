@@ -1,0 +1,67 @@
+.add{
+    height: 3em;
+    width: 3em;
+    background-color: #cf0606;
+    border-radius: 50%;
+    display: inline-block;
+    transition: transform .2s;
+    cursor: pointer;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    margin-left: 1.8em;
+}
+
+.add:hover{
+    transform: scale(1.25); /* IE 9 */
+    -webkit-transform: scale(1.25); /* Safari 3-8 */
+    transform: scale(1.25);
+}
+.field {
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    margin: 23px;
+    padding: 0.5em 23em;
+}
+
+.fields{
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.topList, .themeTop{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.top{
+    padding: 0.5em 2.3em;
+}
+
+.top-items{
+    /* //set the width of the items to  be a third of the space */
+    width: calc(100% / 3.3);
+}
+
+h2{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5em 2.3em;
+}
+
+.tab{
+    padding: 0.3em;
+}
+
+.edit{
+    display: flex;
+    justify-content: center;
+}

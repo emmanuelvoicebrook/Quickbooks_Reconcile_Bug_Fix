@@ -1,0 +1,14 @@
+#Mapping values
+#Wed Aug 19 10:19:36 EDT 2015
+Class=Class__c
+Last\ modified\ by=QB_Last_Modified_By__c
+Paid=Paid_Status__c
+P.\ O.\ \#=PO__c
+Name=Account_Name__c
+Amount=Invoice_Amount__c
+Num=Invoice_Number__c
+Aging=Aging__c
+Entered/Last\ Modified=QB_Last_Modified__c
+Date=Invoice_Date__c
+Trans\ \#=Trans_Num__c
+Open\ Balance=Open_Balance__c

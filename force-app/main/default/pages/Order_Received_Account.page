@@ -1,0 +1,6 @@
+<apex:page standardController="Account">
+    <flow:interview name="Order_Received" finishLocation="/{!Account.Id}">
+       <apex:param name="AccountID" value="{!Account.Id}"/>
+       <apex:param name="CurrentUserID" value="{!$User.Id}"/> 
+    </flow:interview>
+</apex:page>

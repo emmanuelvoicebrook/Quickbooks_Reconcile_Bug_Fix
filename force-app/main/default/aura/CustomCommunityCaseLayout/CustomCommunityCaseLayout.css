@@ -1,0 +1,10 @@
+.THIS hr{
+	margin : 0;
+}
+
+.THIS .no-click a {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}

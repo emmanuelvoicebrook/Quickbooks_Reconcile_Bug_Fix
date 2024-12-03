@@ -1,0 +1,72 @@
+<template>
+    <div class="container" style="height:auto; background:whitesmoke;">
+        <template if:true={error}>
+            <div class="error">
+                <h2 class="slds-text-heading_small slds-text-color_error">
+                    ****{errorMessage}****
+                </h2>
+            </div>
+        </template>
+        <div class="entries" style="width:85%;">
+            <template for:each={_entries} for:item="entry">
+                <div class="entry" key={entry.id}  style=" display:flex">
+                    <!-- picklist -->
+                    <div class="picklist" style="width:33% !important; max-width:33%; min-width:33%;padding:1em">
+                        <lightning-combobox
+                            options={_picklistValues}
+                            label={picklistLabel}
+                            onchange={handlePicklistChange}
+                            value={entry.product_name}
+                            data-id={entry.id}
+                            required
+                        ></lightning-combobox>
+                    </div>
+                    <!-- number -->
+                    <div class="number" style="width:25% !important; max-width:25%; min-width:25%;padding:1em">
+                        <lightning-input
+                            type="number"
+                            label={numberLabel}
+                            onchange={handleNumberChange}
+                            value={entry.quantity}
+                            data-id={entry.id}
+                            required
+                        ></lightning-input>
+                    </div>
+                    <!-- date needed -->
+                    <div class="date" style="width:25% !important; max-width:25%; min-width:25%;padding:1em">
+                        <lightning-input
+                            type="date"
+                            label={dateLabel}
+                            onchange={handleDateChange}
+                            value={entry.required_by_date}
+                            data-id={entry.id}
+                            min={getToday}
+                            required
+                        ></lightning-input>
+                    </div>
+        
+                    <!-- remove button -->
+                    <div class="remove" style="width:15%;padding-top:2.6em">
+                        <lightning-icon
+                            icon-name="action:delete"
+                            onclick={handleRemove}
+                            variant="alert"
+                            data-id={entry.id}
+                            size="x-small"
+                        ></lightning-icon>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div class="addButton" style="padding:1em">
+            <lightning-icon
+                icon-name="action:new"
+                onclick={addNewEntry}
+                size="x-small"
+            ></lightning-icon>
+        </div>
+        
+    </div>
+    
+
+</template>

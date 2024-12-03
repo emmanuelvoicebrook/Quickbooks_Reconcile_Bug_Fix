@@ -1,0 +1,8 @@
+.THIS .card {
+    width: 55% !important;
+}
+
+.THIS .main {
+    display: flex;
+    justify-content: center;
+}

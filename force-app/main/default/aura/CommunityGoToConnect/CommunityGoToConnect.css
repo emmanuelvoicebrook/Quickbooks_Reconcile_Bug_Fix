@@ -1,0 +1,22 @@
+.THIS {
+}
+
+.THIS .button{
+    display:flex;
+    justify-content: center;
+}
+
+.THIS .heading{
+    color: rgb(1, 58, 129);
+    font-weight : 501!important;
+}
+
+.THIS .connect-form{
+	border: 2px solid rgb(1, 58, 129);
+    border-radius: .3rem;
+    padding: .5rem;
+}
+
+.THIS .connect-form hr{
+    margin: 1rem 0;
+}

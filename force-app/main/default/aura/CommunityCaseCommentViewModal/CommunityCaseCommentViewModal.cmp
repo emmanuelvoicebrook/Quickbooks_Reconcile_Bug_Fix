@@ -1,0 +1,30 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" controller="CommunityCaseCommentsRelatedList">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="caseComment" type="Custom_Case_Comments__c" />
+    <aura:attribute name="isLoading" type="Boolean" default="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:if isTrue="{!v.isLoading}">
+        <lightning:spinner alternativeText="Loading" size="medium"/>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.isLoading)}">
+        <div class="user slds-grid slds-wrap slds-p-around_medium">
+            <div class="avatar">
+                <img src="{!v.caseComment.CreatedBy.SmallPhotoUrl}"/>
+            </div>
+            <div class="info">
+                <div class="userName">
+                    <lightning:formattedText value="{!v.caseComment.CreatedBy.Name}" />
+                </div>
+                <div class="date">
+                    <lightning:formattedText value="{!v.caseComment.CreatedDate}" />
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium">
+            <lightning:formattedRichText value="{!v.caseComment.External_Comments__c}" />
+        </div>
+    </aura:if>
+</aura:component>

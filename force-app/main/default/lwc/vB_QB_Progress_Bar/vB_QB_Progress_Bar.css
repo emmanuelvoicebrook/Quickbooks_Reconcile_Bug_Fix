@@ -1,0 +1,49 @@
+.spinnerHolder{
+    position: relative !important;
+    display: flex !important;
+    width: 5% !important;
+}
+.check{
+    display: flex;
+    align-items: center;
+    width: 5% !important;
+}
+.inner-check{
+    position: relative !important;
+}
+.slds-spinner_container {
+    position: relative !important ;
+    display: inline-block !important;
+    width: 5% !important;
+}
+.progressHolder{
+    position: relative;
+    display: inline-block;
+}
+.usepartial{
+    width: 95%;
+}
+.usefull{
+    width: 95%;
+}
+.recordContainer {
+    background-color: rgb(233 233 233)!important;
+}
+.alertBox {
+    font-weight: 200 !important;
+}
+
+.done{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7em;
+}
+
+.btn{
+    margin-right: 1em;
+}
+
+.main{
+    display: flex;
+}

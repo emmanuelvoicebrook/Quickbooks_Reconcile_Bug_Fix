@@ -1,0 +1,53 @@
+<template>
+    <div>
+        <template if:true={loading}>
+            <div style="height: 50vh;">
+                <div>
+                    <lightning-spinner style="position: inherit !important;" alternative-text="Loading" variant="brand"
+                        size="large"></lightning-spinner>
+                </div>
+            </div>
+        </template>
+
+        <template if:false={loading}>
+            <template if:true={get_category_types}>
+                <div class="slds-grid" style="height:100%">
+                    <template if:true={show_accordions}>
+                        <div class="slds-col accordion-control" style={getMenuWidth}>
+
+                            <div
+                                style="display:flex;justify-content:flex-start;margin-top:3.1em;padding-top:12px;padding-left:14px;">
+                                <h1 style="color:#4073a5;font-size:18px">{active_article_collection}</h1>
+                            </div>
+                            <c-tree-accordions internal={internal} 
+                                               name={active_article_collection} 
+                                               accordion-data={get_category_types} 
+                                               active_article_collection_category={active_article_collection_category} 
+                                               active_article_urlname={active_article_urlname} 
+                                               active_article_title={article_title} 
+                                               onexternaltitleclick={handleNewTitle} 
+                                               expand_navigation={expand_navigation}
+                                               oninternaltitleclick={handleInternalTitle}>
+                            </c-tree-accordions>
+
+                        </div>
+                    </template>
+                    <div class="slds-col control-view" style={navigationStyle}>
+                        <template if:true={title_not_chosen}>
+                            <h1>Choose an article to view</h1>
+                        </template>
+                        <template if:false={title_not_chosen}>
+                            <div style="display:flex;justify-content:center;margin-bottom:2em">
+                                <span class="slds-text-heading_large" style={getTitleStyle}>{article_title}</span>
+                            </div>
+                            <lightning-formatted-rich-text value={active_article_content}>
+                            </lightning-formatted-rich-text>
+                            
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </template>
+
+    </div>
+</template>

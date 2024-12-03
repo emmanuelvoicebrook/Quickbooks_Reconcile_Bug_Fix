@@ -1,0 +1,23 @@
+.THIS .button-container {
+    margin: 20px;
+    text-align: right;
+
+}
+
+.THIS .custom-card {
+    border: 1px solid #d8dde6 !important;
+    border-radius: 0.25rem !important;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16) !important;
+}
+
+.THIS  .slds-card__header {
+    background-color: #f4f6f9; /* Change this color to your preferred shade */
+    border-bottom: 1px solid #d8dde6; /* Optional: Add a bottom border to separate the header from the body */
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+
+.THIS .slds-card__body{
+    margin-top: 0 !important; 
+}

@@ -1,0 +1,54 @@
+.container{
+    width:50%;
+}
+.page{
+    background:white;
+    display:flex;
+    justify-content: center;
+    padding: 10em;
+}
+
+
+.slds-form-element__control{
+    position: relative;
+}
+
+
+.searchField{
+   margin: 0;
+  bottom: 25%;
+  -ms-transform: translateY(-25%);
+  transform: translateY(-25%);
+}
+
+.slds-dropdown{
+    top: 73% !important;
+}
+
+.searchIcon, .clearButton{
+    margin-top: -1rem !important;
+}
+.filter{
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.mainLabel{  
+    position: absolute; 
+    top: -2em;
+    font-size: 1.11em;
+}
+
+.options{
+    display: block;
+    float:right; 
+    font-weight:500
+
+}
+.filters{
+    display: inline-block;
+}
+.label{
+    
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,11 @@
+<template>
+    <div class="tile-menu">
+
+        <template for:each={menuItems} for:item="item">
+            <!-- <li key={item.id} class="navbar-items">
+            <img src={item.image} data-id={item.label} />
+        </li> -->
+            <c-community-tile-navigation-item key={item.id} item={item}></c-community-tile-navigation-item>
+        </template>
+    </div>
+</template>

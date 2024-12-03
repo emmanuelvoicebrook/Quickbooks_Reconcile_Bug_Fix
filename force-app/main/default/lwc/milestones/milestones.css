@@ -1,0 +1,9 @@
+.milestones-item{
+    font-size: 0.8125rem;
+    color: rgb(24, 24, 24);
+    padding-bottom: 0.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

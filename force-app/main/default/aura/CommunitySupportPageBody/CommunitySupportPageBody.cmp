@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+    
+   <div>
+   	    <h3>
+            
+            
+            Contact Information
+        </h3>
+       <br/>
+    
+        <div>
+            <ul>
+                <li>Phone: 1-866-864-2397</li>
+                <li>Email: support@voicebrook.com</li>
+                <li>Chat: click on the icon at the bottom of the page</li>
+            </ul>
+        </div>
+       <br/><br/>
+    
+        <h3>
+            Hours of Operation
+        </h3>
+       <br/>
+    
+        <div>
+            <ul>
+                <li>Monday - Friday, 8am - 12am EST</li>
+                <li>Sat (Phone only), 9am - 5pm EST</li>
+                <li>Excluding observed Voicebrook holidays. Click here for the current list of observed holidays.</li>
+            </ul>
+        </div>	 
+   </div>
+</aura:component>

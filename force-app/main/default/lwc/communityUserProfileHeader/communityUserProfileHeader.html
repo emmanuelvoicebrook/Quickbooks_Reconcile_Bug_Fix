@@ -1,0 +1,26 @@
+<template>
+    <div class="profile-menu">
+        <div class="profile-info">
+            <div class="photo">
+                <img src={userAvatar} class="avatar" onclick={toggleDropdown} />
+            </div>
+        </div>
+        <template if:true={isDropdownOpen}>
+            <div class="dropdown-menu">
+                <div class="user-info slds-grid">
+                    <div class="slds-col menu-photo slds-size_1-of-6">
+                        <div class="photo">
+                            <img src={userAvatar} class="avatar" />
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_5-of-6">
+                        <span class="user-name">{userName}</span>
+                        <span class="company-name"></span>
+                        <hr>
+                        <a href="javascript:void(0);" class="item" onclick={handleLogout}>Logout</a>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

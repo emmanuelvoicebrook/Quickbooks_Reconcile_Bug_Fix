@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>VB Collection to Picklist</masterLabel>
+    <description>Convert a collection of records into a picklist screen element></description>
+
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <propertyType extends="SObject" name="T" label="Salesforce Object" description="Salesforce object that the picklist records belong to" />
+            <property name="masterLabel" label="Master Label" type="String" role="inputOnly" description="Screen label for this component" />
+            <property name="records" type="{T[]}" label="Input Record Collection" role="inputOnly" description="Collection of records to use as picklist values" />
+            <property name="displayFieldName" label="Picklist Label Field (API)" type="String" role="inputOnly" description="Enter a field to be used as the label for each picklist item" />
+            <property name="displayMode" label="Single/Multiple Choice Mode" type="String" role="inputOnly" description="Enter the word 'Single' or 'Multiple'"/>
+            <property name="defaultCheckBoxValue" label="Default Checkbox Value" type="Boolean" role="inputOnly" description="Should all values start as checked (True) or unchecked (False).  Only applies to multi-select mode."/>
+            <property name="selectedRecordsIdCollection" label="Output Collection" type="String[]" role="outputOnly" description="Collection of IDs output"/>
+            <property name="required" label="Required" role="inputOnly" type="Boolean" />
+            <property name="selectedRecordId" label="Output Record" type="String" role="outputOnly" description="Single ID output" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

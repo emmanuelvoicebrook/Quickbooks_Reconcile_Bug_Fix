@@ -1,0 +1,6 @@
+<apex:page >
+    <flow:interview name="New_Ticket_Creation" finishLocation="closeWin">
+       <apex:param name="ContactID_ReportedBy" value="{$User.ContactId}"/>
+       <apex:param name="CurrentUserID" value="{!$User.Id}"/> 
+    </flow:interview>
+</apex:page>
